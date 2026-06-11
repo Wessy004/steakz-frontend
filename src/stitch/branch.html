@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>STEAKZ | London Flagship Dashboard</title>
+<script type='text/javascript' nonce='A3al2FHkDeWnatGBnWvNGw==' src='https://contribution.usercontent.google.com/e-LaDJAkNoyuInGyozpdMUEvWmhzYkIiCJdVkrVk9IiYRWqW6ogYwQUZYhD4O-QwBZU0OZxfCwRBFjl33vicG5gInH4RLc9xP32fp6jUX_RoiaG2ePGQz0J6KSzXav6Q14PwEw3UXr-13AITFuDnn5yc6AwsdGcxYKnlsR2wi0Dlor98kWunmuuDtmrES7kQ58t_TIcAHCNIYmB5tTVojzxhURpRkEcJ_E2M61fmsw4y-C9IwhNIDAdjgFtgEx4TD-Agbz_q8gd4KhzSyV6cjzA1HLWY5PFiYkZKCwRBC1XAYexqf5mu1h1ThlhSSH3x_TpVVel1fGVGjg-fymUz3EQbb51d42hG4axylNWEuphjRJ0U91wYUzsbwItx1vcFEDcGgY4oJPkd_Aec5C5TECIVA-m8pld2gAlUkuuSx7MtNb4b_Iqc41KtkfshnfC1xQ95cxfdvLbgWqGC8tqFj23H24J3HS_fK7JFEEdVDs0i4I9NSiguLt7Q-lWuF_aHBBGbhHSliAz3uurB9Mew3mubUnYZNvrWMVM2pNWZA0V0khvUl0p15OMCQaf4K6vCLisxt8xVigdeX1wEfh7dwkcg54gdIk7STMC-UT0Unc7sKsNumO9QbJDCBliifCkTcieu7caJs2cPwD6EhVp5Q5nfQQQJ4iA_aZTIE-0q1Go5BQIpnRMZz2h8Mjk-5PL3FeBkNfmwmuacW6QPGjUTWELn46ncjNCTMOhmSbt7EvA0rcgGHZyBAj8ueWS7csprvLZE6sJMreqQEd5yOj-RkcJWrhfvPACwYC5g4d2g'></script><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#872000",
+                    "on-tertiary-container": "#8d8b8b",
+                    "surface-dim": "#121414",
+                    "on-primary-fixed": "#3d0506",
+                    "inverse-primary": "#954742",
+                    "outline-variant": "#544341",
+                    "on-secondary-container": "#541100",
+                    "tertiary-container": "#242424",
+                    "secondary-container": "#ff5625",
+                    "background": "#121414",
+                    "on-tertiary-fixed-variant": "#474746",
+                    "tertiary-fixed": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "inverse-on-surface": "#2f3131",
+                    "primary-container": "#4a0e0e",
+                    "primary-fixed-dim": "#ffb3ad",
+                    "surface-container-high": "#282a2b",
+                    "on-secondary": "#601400",
+                    "on-secondary-fixed": "#3b0900",
+                    "secondary-fixed": "#ffdbd1",
+                    "surface-container": "#1e2020",
+                    "surface-container-lowest": "#0c0f0f",
+                    "surface-container-highest": "#333535",
+                    "inverse-surface": "#e2e2e2",
+                    "on-primary-container": "#cc726d",
+                    "primary": "#ffb3ad",
+                    "error": "#ffb4ab",
+                    "secondary-fixed-dim": "#ffb5a0",
+                    "surface-container-low": "#1a1c1c",
+                    "on-primary": "#5a1a19",
+                    "surface-variant": "#333535",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "tertiary": "#c8c6c5",
+                    "on-primary-fixed-variant": "#77302d",
+                    "surface": "#121414",
+                    "outline": "#a28c8a",
+                    "on-surface-variant": "#dac1bf",
+                    "on-error": "#690005",
+                    "on-error-container": "#ffdad6",
+                    "primary-fixed": "#ffdad7",
+                    "on-surface": "#e2e2e2",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "on-background": "#e2e2e2",
+                    "surface-tint": "#ffb3ad",
+                    "surface-bright": "#38393a",
+                    "on-tertiary": "#313030",
+                    "secondary": "#ffb5a0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "base": "8px",
+                    "lg": "40px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "container-max": "1440px",
+                    "md": "24px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "display-lg": ["Montserrat"],
+                    "body-lg": ["Inter"],
+                    "mono-ui": ["Geist"],
+                    "headline-lg": ["Montserrat"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Montserrat"],
+                    "label-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "mono-ui": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .culinary-blur {
+            backdrop-filter: blur(8px);
+            background: rgba(30, 32, 32, 0.8);
+        }
+        body {
+            background-color: #121414;
+            color: #e2e2e2;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-dim border-r border-outline-variant/20 shadow-sm flex flex-col py-md px-base z-50">
+<div class="mb-xl px-sm">
+<h1 class="font-headline-lg text-headline-lg font-bold text-secondary-container uppercase tracking-tighter">STEAKZ</h1>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Executive Suite</p>
+</div>
+<nav class="flex flex-col gap-base flex-1">
+<a class="flex items-center gap-sm px-sm py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-150">analytics</span>
+<span class="font-label-lg text-label-lg">HQ</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm text-secondary font-bold border-r-2 border-secondary hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-150">storefront</span>
+<span class="font-label-lg text-label-lg">Branch</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-150">restaurant</span>
+<span class="font-label-lg text-label-lg">Chef</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-150">person_raised_hand</span>
+<span class="font-label-lg text-label-lg">Waiter</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-150">payments</span>
+<span class="font-label-lg text-label-lg">Cashier</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant/10 pt-md flex items-center gap-sm px-sm">
+<img alt="Manager Profile" class="w-10 h-10 rounded-full object-cover grayscale" data-alt="A professional headshot of a middle-aged restaurant manager with a sharp, authoritative presence. He is dressed in a dark, tailored corporate suit against a blurred background of a high-end, moody restaurant interior with warm ambient lighting. The visual style is professional, high-contrast, and aligns with a premium hospitality brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU_AgafiBe10-nUzF2Bb7DDkvbCyWMSgNGHQNDTsB-nxJIvkhWleggpBuYPpzTNkcFo5Xcxil_b5y_2sjo0_hu09dwg5bQVRhkRh811bO7XgpXyPTNsJUQhhFXsFjeIrRPbC-AqLZDumi0BYMQTmN4GP648GbCsW0DjEmwKFAOZcwyUDrFtGaygU-evWPzAbkVRCmoSYH1wdTluiFG_9migjLbGt4d8tcG0IP2D6ITD1By3yof-kDie7KGGIYE25MzbeAzKQtIrHSl"/>
+<div>
+<p class="font-label-lg text-label-lg font-bold text-on-surface">Alex Mercer</p>
+<p class="font-label-md text-label-md text-on-tertiary-container">London Flagship</p>
+</div>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-gutter h-xl ml-64 max-w-[calc(1440px-256px)] bg-surface-container-low border-b border-outline-variant/10 sticky top-0 z-40">
+<div class="flex items-center gap-lg">
+<span class="font-headline-md text-headline-md font-bold text-secondary uppercase">STEAKZ</span>
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="bg-surface-container-lowest border border-outline-variant/20 rounded-lg pl-10 pr-4 py-1 text-sm focus:border-secondary outline-none transition-all w-64" placeholder="Search orders or staff..." type="text"/>
+</div>
+</div>
+<nav class="flex items-center gap-lg">
+<div class="flex items-center gap-md">
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-secondary transition-opacity" href="#">Dashboard</a>
+<a class="font-label-lg text-label-lg text-secondary border-b-2 border-secondary pb-1" href="#">Analytics</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-secondary transition-opacity" href="#">Inventory</a>
+</div>
+<div class="flex items-center gap-md border-l border-outline-variant/20 pl-lg">
+<button class="relative hover:opacity-80 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-secondary-container rounded-full"></span>
+</button>
+<button class="hover:opacity-80 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</button>
+<button class="bg-secondary-container text-on-secondary-container font-label-lg text-label-lg px-md py-2 rounded uppercase tracking-wider active:scale-95 transition-all">Switch Branch</button>
+</div>
+</nav>
+</header>
+<!-- Main Content -->
+<main class="ml-64 p-gutter max-w-container-max">
+<!-- Header Section -->
+<section class="mb-lg flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">London Flagship</h2>
+<div class="flex items-center gap-sm">
+<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+<p class="font-label-lg text-label-lg text-on-surface-variant">OPERATIONAL | 00:42 GMT</p>
+</div>
+</div>
+<div class="flex gap-md">
+<div class="bg-surface-container p-md border border-outline-variant/10">
+<p class="font-label-md text-label-md text-on-tertiary-container mb-xs uppercase">Current Revenue</p>
+<p class="font-mono-ui text-headline-md text-secondary">£11,240.50</p>
+</div>
+<div class="bg-surface-container p-md border border-outline-variant/10">
+<p class="font-label-md text-label-md text-on-tertiary-container mb-xs uppercase">Target</p>
+<p class="font-mono-ui text-headline-md text-on-surface">£14,500.00</p>
+</div>
+</div>
+</section>
+<!-- Bento Grid Operations -->
+<div class="bento-grid">
+<!-- Live Occupancy (Main Hero Card) -->
+<div class="col-span-8 bg-surface-container p-lg border border-outline-variant/10 relative overflow-hidden flex flex-col justify-between min-h-[340px]">
+<div class="relative z-10">
+<p class="font-label-lg text-label-lg text-secondary-container mb-xs font-bold uppercase">Live Occupancy</p>
+<h3 class="font-display-lg text-display-lg text-on-surface">85% Capacity</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md mt-sm">Peak dinner rush active. 12 tables currently serving, 4 reservations arriving in the next 15 minutes.</p>
+</div>
+<div class="mt-lg grid grid-cols-4 gap-md relative z-10">
+<div class="bg-surface-container-high p-md">
+<p class="font-label-md text-label-md text-on-tertiary-container uppercase">Active Tables</p>
+<p class="font-headline-md text-headline-md">12</p>
+</div>
+<div class="bg-surface-container-high p-md">
+<p class="font-label-md text-label-md text-on-tertiary-container uppercase">Avg Turn</p>
+<p class="font-headline-md text-headline-md">52m</p>
+</div>
+<div class="bg-surface-container-high p-md">
+<p class="font-label-md text-label-md text-on-tertiary-container uppercase">Waiting</p>
+<p class="font-headline-md text-headline-md">6</p>
+</div>
+<div class="bg-surface-container-high p-md">
+<p class="font-label-md text-label-md text-on-tertiary-container uppercase">EST. Revenue</p>
+<p class="font-headline-md text-headline-md text-secondary">£1.9k</p>
+</div>
+</div>
+<div class="absolute right-0 top-0 w-1/3 h-full opacity-20 pointer-events-none">
+<div class="w-full h-full bg-gradient-to-l from-secondary/30 to-transparent"></div>
+</div>
+</div>
+<!-- Inventory Alert -->
+<div class="col-span-4 bg-error-container/10 p-lg border border-error/20 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-sm text-error mb-base">
+<span class="material-symbols-outlined">warning</span>
+<p class="font-label-lg text-label-lg font-bold uppercase">Critical Alert</p>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Wagyu A5 Low Stock</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Only 4.5kg remaining. Expected depletion by 21:00 PM based on current order velocity.</p>
+</div>
+<button class="w-full py-md border border-error text-error font-label-lg text-label-lg uppercase hover:bg-error/10 transition-colors">Emergency Restock</button>
+</div>
+<!-- Staffing List -->
+<div class="col-span-6 bg-surface-container border border-outline-variant/10">
+<div class="p-md border-b border-outline-variant/10 flex justify-between items-center">
+<h5 class="font-label-lg text-label-lg font-bold uppercase text-on-surface">Staff on Shift</h5>
+<span class="font-label-md text-label-md text-on-tertiary-container">14 Total</span>
+</div>
+<div class="p-md space-y-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-secondary-container/20 flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-secondary">restaurant</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Chef de Cuisine</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Marco V.</p>
+</div>
+</div>
+<span class="px-base py-xs bg-green-500/10 text-green-500 font-label-md text-label-md uppercase">On Fire</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-secondary-container/20 flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-secondary">restaurant</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Sous Chef</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Elena R.</p>
+</div>
+</div>
+<span class="px-base py-xs bg-green-500/10 text-green-500 font-label-md text-label-md uppercase">Active</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-on-tertiary-container/20 flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-on-tertiary-container">person_raised_hand</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Lead Waiter</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Julian S.</p>
+</div>
+</div>
+<span class="px-base py-xs bg-blue-500/10 text-blue-400 font-label-md text-label-md uppercase">Section A</span>
+</div>
+</div>
+</div>
+<!-- Revenue Trend -->
+<div class="col-span-6 bg-surface-container border border-outline-variant/10 p-lg">
+<div class="flex justify-between items-center mb-lg">
+<h5 class="font-label-lg text-label-lg font-bold uppercase text-on-surface">Sales Velocity</h5>
+<div class="flex gap-sm">
+<span class="w-3 h-3 bg-secondary rounded-full"></span>
+<span class="font-label-md text-label-md text-on-surface-variant">Today</span>
+</div>
+</div>
+<!-- Visual Chart Placeholder using Gradients -->
+<div class="h-48 w-full flex items-end gap-xs">
+<div class="flex-1 bg-surface-container-highest/50 h-1/4 rounded-t-xs"></div>
+<div class="flex-1 bg-surface-container-highest/50 h-2/5 rounded-t-xs"></div>
+<div class="flex-1 bg-surface-container-highest/50 h-1/2 rounded-t-xs"></div>
+<div class="flex-1 bg-surface-container-highest/50 h-3/4 rounded-t-xs"></div>
+<div class="flex-1 bg-secondary h-4/5 rounded-t-xs shadow-[0_0_20px_rgba(255,181,160,0.2)]"></div>
+<div class="flex-1 bg-secondary h-[95%] rounded-t-xs shadow-[0_0_20px_rgba(255,181,160,0.3)]"></div>
+<div class="flex-1 bg-secondary-container h-[70%] rounded-t-xs"></div>
+<div class="flex-1 bg-surface-container-highest/50 h-1/3 rounded-t-xs"></div>
+<div class="flex-1 bg-surface-container-highest/50 h-1/2 rounded-t-xs"></div>
+</div>
+<div class="mt-md pt-md border-t border-outline-variant/10 flex justify-between">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Pacing +12% above yesterday</p>
+<p class="font-mono-ui text-label-lg text-secondary">PROJECTED: £17.6K</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="ml-64 w-[calc(100%-256px)] py-lg mt-xl bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto">
+<div class="mb-md md:mb-0">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">STEAKZ PREMIUM HOSPITALITY SYSTEMS - ENGLAND</span>
+<p class="font-body-sm text-body-sm text-on-tertiary-container">© 2024 STEAKZ PREMIUM HOSPITALITY SYSTEMS</p>
+</div>
+<nav class="flex gap-lg">
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary transition-colors" href="#">Support</a>
+</nav>
+</div>
+</footer>
+<!-- Atmosphere Micro-interaction script -->
+<script>
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            // Subtle parallax for cards
+            const cards = document.querySelectorAll('.bg-surface-container');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardX = (e.clientX - rect.left) / rect.width - 0.5;
+                const cardY = (e.clientY - rect.top) / rect.height - 0.5;
+                
+                if (Math.abs(cardX) < 1 && Math.abs(cardY) < 1) {
+                    card.style.transform = `perspective(1000px) rotateX(${cardY * 2}deg) rotateY(${cardX * 2}deg)`;
+                } else {
+                    card.style.transform = 'none';
+                }
+            });
+        });
+    </script>
+</body></html>

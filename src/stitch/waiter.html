@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>STEAKZ | Waiter Interface</title>
+<script type='text/javascript' nonce='NP/Vu05S1/zC+8LLuIytOQ==' src='https://contribution.usercontent.google.com/VgY49M_3BxbrYiUMF_NgdfrYWnbQ0Eh6SwK61TDj5fakhtFHSl4RbJ-pZCgIx1f2UlCirEkwIC-CX5sNCuwgcPzhBF05sz8EavDPETp5SgblaqOYRG_PiO64kaB4EfKm_qYxYTWI6_CzOMFxuU-9RfGaVRh7Y6w3jbc0dlotBN0aG1BcypEC1hf8e4ojb-BBUYCSRomI6kJgesUYcutn7a7n5kAlsTEu50BKGYpeCPbL42iChI6mLfFYEZicXoJlJWcho0nhUA8knwAs2OQXVIJP2StHX7aPUG4LoKkehzNQvSifOIqQfnJQPy_uXrWuSojsTotej3zLaplpesr68fyrK3Hdh98BgQJFXNl7zAzwsVHZgNd_XCVphRDxrvg85GHEy_FpPxD4LOsxlNxI2hZBBkjj_SHe-eeSrge2MbDAcBEPYo6QWh4V-FuqclBCOm0ejyz0Ommr86ZbxSbGX9vE-Z8pqgjgSbapYcUsPJMBf2rZ9ZEnTt1mVs1tryrwkpjIMjSfADgi7ssOpE6QnuKWZBb85jdZ6aVTF2lhq5-XZf7h5d4NeyMZvB0sy5Dj5Y-8bIxkTKMaiHWeC5HK6VGur7DX28J1oCxNLjr9RZe5Fe5VOHW9qvKhnxZxLWzIRDbcZegAV_MItEmseCCDeREwwOJQroEB9NzC3tEpZ74x5AtJB3XXfSoC7T81T40AjVveNW9peB9JeDqRH_2LruJUPItT_Bdwv1eJ23-P3jqvH0LhU0LMYay0DL0qFhhMpLRpRpwxcysrJDAajLk3Z_wGkeiLf14qVLVdejjk'></script><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom Scrollbar for Kitchen Environment */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #121414; }
+        ::-webkit-scrollbar-thumb { background: #333535; border-radius: 10px; }
+        
+        .glass-panel {
+            background: rgba(30, 32, 32, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(84, 67, 65, 0.2);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#872000",
+                      "on-tertiary-container": "#8d8b8b",
+                      "surface-dim": "#121414",
+                      "on-primary-fixed": "#3d0506",
+                      "inverse-primary": "#954742",
+                      "outline-variant": "#544341",
+                      "on-secondary-container": "#541100",
+                      "tertiary-container": "#242424",
+                      "secondary-container": "#ff5625",
+                      "background": "#121414",
+                      "on-tertiary-fixed-variant": "#474746",
+                      "tertiary-fixed": "#e5e2e1",
+                      "error-container": "#93000a",
+                      "inverse-on-surface": "#2f3131",
+                      "primary-container": "#4a0e0e",
+                      "primary-fixed-dim": "#ffb3ad",
+                      "surface-container-high": "#282a2b",
+                      "on-secondary": "#601400",
+                      "on-secondary-fixed": "#3b0900",
+                      "secondary-fixed": "#ffdbd1",
+                      "surface-container": "#1e2020",
+                      "surface-container-lowest": "#0c0f0f",
+                      "surface-container-highest": "#333535",
+                      "inverse-surface": "#e2e2e2",
+                      "on-primary-container": "#cc726d",
+                      "primary": "#ffb3ad",
+                      "error": "#ffb4ab",
+                      "secondary-fixed-dim": "#ffb5a0",
+                      "surface-container-low": "#1a1c1c",
+                      "on-primary": "#5a1a19",
+                      "surface-variant": "#333535",
+                      "tertiary-fixed-dim": "#c8c6c5",
+                      "tertiary": "#c8c6c5",
+                      "on-primary-fixed-variant": "#77302d",
+                      "surface": "#121414",
+                      "outline": "#a28c8a",
+                      "on-surface-variant": "#dac1bf",
+                      "on-error": "#690005",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed": "#ffdad7",
+                      "on-surface": "#e2e2e2",
+                      "on-tertiary-fixed": "#1c1b1b",
+                      "on-background": "#e2e2e2",
+                      "surface-tint": "#ffb3ad",
+                      "surface-bright": "#38393a",
+                      "on-tertiary": "#313030",
+                      "secondary": "#ffb5a0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xl": "64px",
+                      "base": "8px",
+                      "lg": "40px",
+                      "sm": "12px",
+                      "xs": "4px",
+                      "container-max": "1440px",
+                      "md": "24px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "body-sm": ["Inter"],
+                      "display-lg": ["Montserrat"],
+                      "body-lg": ["Inter"],
+                      "mono-ui": ["Geist"],
+                      "headline-lg": ["Montserrat"],
+                      "label-md": ["Inter"],
+                      "headline-lg-mobile": ["Montserrat"],
+                      "body-md": ["Inter"],
+                      "headline-md": ["Montserrat"],
+                      "label-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "mono-ui": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "label-md": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "label-lg": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface-dim text-on-surface font-body-md overflow-hidden">
+<!-- Predicted SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container border-r border-outline-variant/20 shadow-sm flex flex-col py-md px-base hidden md:flex">
+<div class="mb-xl px-sm">
+<h1 class="font-headline-lg text-headline-lg font-bold text-secondary-container uppercase tracking-tighter">STEAKZ</h1>
+<p class="font-label-md text-label-md text-on-tertiary-container">Executive Suite</p>
+</div>
+<nav class="flex-1 space-y-base">
+<a class="flex items-center gap-sm px-md py-sm rounded-lg transition-colors text-on-surface-variant hover:bg-surface-container-high group" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-lg text-label-lg">HQ</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg transition-colors text-on-surface-variant hover:bg-surface-container-high group" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label-lg text-label-lg">Branch</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg transition-colors text-on-surface-variant hover:bg-surface-container-high group" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+<span class="font-label-lg text-label-lg">Chef</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg transition-colors text-secondary font-bold border-r-2 border-secondary scale-95 duration-150 active-tab" href="#">
+<span class="material-symbols-outlined" data-icon="person_raised_hand" style="font-variation-settings: &#39;FILL&#39; 1;">person_raised_hand</span>
+<span class="font-label-lg text-label-lg">Waiter</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg transition-colors text-on-surface-variant hover:bg-surface-container-high group" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-lg text-label-lg">Cashier</span>
+</a>
+</nav>
+<div class="mt-auto p-sm flex items-center gap-sm bg-surface-container-low rounded-xl">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div class="overflow-hidden">
+<p class="font-label-lg text-label-lg truncate">Marcus V.</p>
+<p class="text-xs text-on-tertiary-container">Floor Lead</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-64 h-screen flex flex-col relative">
+<!-- Predicted TopNavBar -->
+<header class="flex justify-between items-center w-full px-gutter h-xl bg-surface-container-low border-b border-outline-variant/10">
+<div class="flex items-center gap-md">
+<h2 class="font-headline-md text-headline-md font-bold text-secondary uppercase">Waiter Console</h2>
+<div class="hidden lg:flex items-center gap-sm border-l border-outline-variant/30 pl-md">
+<span class="flex items-center gap-xs text-secondary-container">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-label-md text-label-md uppercase tracking-widest">Live Shift</span>
+</span>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<div class="hidden md:flex items-center gap-md">
+<button class="font-label-lg text-label-lg text-secondary border-b-2 border-secondary pb-1">Floor Map</button>
+<button class="font-label-lg text-label-lg text-on-surface-variant hover:text-secondary transition-opacity">Active Orders</button>
+<button class="font-label-lg text-label-lg text-on-surface-variant hover:text-secondary transition-opacity">Table History</button>
+</div>
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-all rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="px-md h-9 bg-secondary-container text-on-secondary-container font-label-lg text-label-lg rounded-lg hover:opacity-80 active:scale-95 transition-all">
+                        Switch Branch
+                    </button>
+</div>
+</div>
+</header>
+<!-- Dynamic Content Shell (Mobile-First Layout) -->
+<div class="flex-1 overflow-hidden flex flex-col lg:flex-row p-md gap-md">
+<!-- Table Map Section (Left/Top) -->
+<section class="flex-grow glass-panel rounded-xl p-md flex flex-col">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Main Dining Hall</h3>
+<div class="flex gap-sm">
+<div class="flex items-center gap-xs">
+<span class="w-3 h-3 rounded-full bg-outline-variant/40"></span>
+<span class="text-[10px] font-bold uppercase tracking-tighter opacity-70">Avail</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="w-3 h-3 rounded-full bg-secondary-container"></span>
+<span class="text-[10px] font-bold uppercase tracking-tighter opacity-70">Order</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-[10px] font-bold uppercase tracking-tighter opacity-70">Wait</span>
+</div>
+</div>
+</div>
+<!-- Table Grid: Bento-style layout -->
+<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 xl:grid-cols-5 gap-sm flex-1 overflow-y-auto pr-xs">
+<!-- Table 01: Available -->
+<div class="aspect-square bg-surface-container-highest/20 border border-outline-variant/20 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-surface-container-high transition-all group active:scale-95">
+<span class="font-mono-ui text-display-lg opacity-10 group-hover:opacity-20 transition-opacity">01</span>
+<span class="font-label-lg text-label-lg text-on-surface-variant -mt-6">T01</span>
+<span class="text-[10px] font-mono-ui text-outline mt-1">4 SEATS</span>
+</div>
+<!-- Table 02: Ordering (Flame Orange) -->
+<div class="aspect-square bg-secondary-container/10 border border-secondary-container/40 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-secondary-container/20 transition-all group active:scale-95 relative overflow-hidden">
+<div class="absolute top-2 right-2 w-2 h-2 rounded-full bg-secondary-container"></div>
+<span class="font-mono-ui text-display-lg text-secondary-container opacity-20">02</span>
+<span class="font-label-lg text-label-lg text-secondary-container font-bold -mt-6">T02</span>
+<span class="text-[10px] font-mono-ui text-secondary-container/80 mt-1">12 MIN</span>
+</div>
+<!-- Table 03: Waiting (Bone White Accent) -->
+<div class="aspect-square bg-primary/10 border border-primary/40 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-primary/20 transition-all group active:scale-95">
+<span class="font-mono-ui text-display-lg text-primary opacity-20">03</span>
+<span class="font-label-lg text-label-lg text-primary font-bold -mt-6">T03</span>
+<span class="text-[10px] font-mono-ui text-primary/80 mt-1">WAITING</span>
+</div>
+<!-- Additional Tables... -->
+<div class="aspect-square bg-surface-container-highest/20 border border-outline-variant/20 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-surface-container-high transition-all group">
+<span class="font-mono-ui text-display-lg opacity-10">04</span>
+<span class="font-label-lg text-label-lg text-on-surface-variant -mt-6">T04</span>
+</div>
+<div class="aspect-square bg-surface-container-highest/20 border border-outline-variant/20 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-surface-container-high transition-all group">
+<span class="font-mono-ui text-display-lg opacity-10">05</span>
+<span class="font-label-lg text-label-lg text-on-surface-variant -mt-6">T05</span>
+</div>
+<!-- Row 2 -->
+<div class="aspect-square bg-error-container/10 border border-error/40 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-error-container/20 transition-all group">
+<span class="font-mono-ui text-display-lg text-error opacity-20">06</span>
+<span class="font-label-lg text-label-lg text-error font-bold -mt-6">T06</span>
+<span class="text-[10px] font-mono-ui text-error mt-1">LATE</span>
+</div>
+<div class="aspect-square bg-surface-container-highest/20 border border-outline-variant/20 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-surface-container-high transition-all group">
+<span class="font-mono-ui text-display-lg opacity-10">07</span>
+<span class="font-label-lg text-label-lg text-on-surface-variant -mt-6">T07</span>
+</div>
+<div class="aspect-square bg-primary-container/20 border border-primary/20 rounded-lg flex flex-col items-center justify-center cursor-pointer">
+<span class="font-mono-ui text-display-lg text-on-primary opacity-10">08</span>
+<span class="font-label-lg text-label-lg text-on-surface-variant -mt-6">T08</span>
+</div>
+</div>
+</section>
+<!-- Order Entry Panel (Right/Bottom) -->
+<section class="w-full lg:w-[400px] flex flex-col gap-md">
+<!-- Active Order List -->
+<div class="glass-panel rounded-xl p-md flex flex-col h-[350px] lg:h-auto lg:flex-1">
+<div class="flex justify-between items-center border-b border-outline-variant/20 pb-sm mb-sm">
+<div>
+<span class="font-label-md text-label-md text-secondary-container uppercase font-bold">New Order</span>
+<h4 class="font-headline-md text-headline-md">Table #02</h4>
+</div>
+<button class="w-8 h-8 rounded-full border border-outline-variant/30 flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto space-y-sm pr-xs">
+<!-- Order Item -->
+<div class="flex items-start justify-between bg-surface-container-low p-sm rounded-lg border-l-2 border-secondary-container">
+<div>
+<p class="font-label-lg text-label-lg uppercase">Signature Ribeye</p>
+<div class="flex gap-xs mt-1">
+<span class="px-xs py-0.5 bg-secondary-container text-on-secondary text-[10px] font-bold rounded uppercase">Medium Rare</span>
+<span class="px-xs py-0.5 bg-surface-container-highest text-on-surface-variant text-[10px] font-bold rounded uppercase">+ Peppercorn</span>
+</div>
+</div>
+<span class="font-mono-ui text-body-sm text-secondary">£54.00</span>
+</div>
+<!-- Order Item -->
+<div class="flex items-start justify-between bg-surface-container-low p-sm rounded-lg border-l-2 border-outline-variant/20">
+<div>
+<p class="font-label-lg text-label-lg uppercase">Mashed Potatoes</p>
+<p class="text-[10px] text-on-tertiary-container uppercase tracking-widest mt-1">Double Garlic</p>
+</div>
+<span class="font-mono-ui text-body-sm text-on-surface-variant">£12.00</span>
+</div>
+<!-- Empty Placeholder for fast entry -->
+<div class="border-2 border-dashed border-outline-variant/20 rounded-lg p-md flex flex-col items-center justify-center text-on-tertiary-container opacity-40">
+<span class="material-symbols-outlined mb-xs">add_circle</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Tap items to add</span>
+</div>
+</div>
+<div class="pt-md mt-sm border-t border-outline-variant/20">
+<div class="flex justify-between mb-md">
+<span class="font-label-lg text-label-lg uppercase opacity-60">Total Est.</span>
+<span class="font-mono-ui text-headline-md text-secondary">£66.00</span>
+</div>
+<button class="w-full py-md bg-secondary-container text-on-secondary font-headline-md uppercase tracking-widest rounded-lg hover:brightness-110 active:scale-[0.98] transition-all shadow-lg shadow-secondary-container/20">
+                            Send to Kitchen
+                        </button>
+</div>
+</div>
+<!-- Live Status Widget -->
+<div class="bg-primary-container/20 border border-primary/20 rounded-xl p-md flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary relative">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full animate-ping"></span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-primary font-bold uppercase">Order Ready</p>
+<p class="font-body-md text-body-md text-on-surface">Order #45 - Ready at Station 1</p>
+</div>
+<button class="px-sm py-xs border border-primary text-primary font-label-md uppercase rounded hover:bg-primary/10 transition-colors">
+                        Pickup
+                    </button>
+</div>
+</section>
+</div>
+<!-- Mobile Bottom Tab Bar (Mobile Only Filter) -->
+<nav class="md:hidden flex justify-around items-center h-xl bg-surface-container border-t border-outline-variant/10 px-md">
+<button class="flex flex-col items-center text-secondary active-tab">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="text-[10px] font-bold uppercase mt-1">Floor</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span class="text-[10px] font-bold uppercase mt-1">Orders</span>
+</button>
+<button class="w-12 h-12 bg-secondary-container rounded-full -mt-8 flex items-center justify-center shadow-xl shadow-secondary-container/40 border-4 border-surface-dim">
+<span class="material-symbols-outlined text-on-secondary" data-icon="add" style="font-variation-settings: &#39;wght&#39; 700;">add</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="text-[10px] font-bold uppercase mt-1">Log</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-[10px] font-bold uppercase mt-1">Profile</span>
+</button>
+</nav>
+<!-- Predicted Footer -->
+<footer class="hidden lg:flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto w-full py-md mt-auto bg-surface-container-lowest border-t border-outline-variant/20">
+<p class="font-label-md text-label-md font-bold text-on-surface">STEAKZ PREMIUM HOSPITALITY SYSTEMS</p>
+<p class="font-body-sm text-body-sm text-on-tertiary-container">© 2024 - System Online - Latency 14ms</p>
+<div class="flex gap-md">
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary" href="#">Support</a>
+</div>
+</footer>
+</main>
+<!-- Visual Atmosphere: Subtle Gradient Background -->
+<div class="fixed inset-0 pointer-events-none z-[-1] opacity-20">
+<div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary-container/20 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px]"></div>
+</div>
+<!-- Quick Item Overlay (Atmospheric Interaction Example) -->
+<div class="fixed inset-0 bg-surface-dim/90 backdrop-blur-md z-50 flex items-center justify-center p-md hidden" id="itemModal">
+<div class="w-full max-w-md bg-surface-container rounded-2xl p-xl shadow-2xl border border-outline-variant/20">
+<h3 class="font-headline-lg text-headline-lg-mobile text-on-surface uppercase mb-md">Select Modifier</h3>
+<div class="grid grid-cols-2 gap-md mb-xl">
+<button class="p-md rounded-xl border border-secondary-container bg-secondary-container/10 text-secondary-container font-bold uppercase tracking-widest text-center">Medium Rare</button>
+<button class="p-md rounded-xl border border-outline-variant/20 hover:border-secondary transition-colors font-bold uppercase tracking-widest text-center">Medium</button>
+<button class="p-md rounded-xl border border-outline-variant/20 hover:border-secondary transition-colors font-bold uppercase tracking-widest text-center">Medium Well</button>
+<button class="p-md rounded-xl border border-outline-variant/20 hover:border-secondary transition-colors font-bold uppercase tracking-widest text-center">Well Done</button>
+</div>
+<div class="flex gap-md">
+<button class="flex-1 py-md border border-outline-variant text-on-surface uppercase font-bold rounded-lg" onclick="toggleModal()">Cancel</button>
+<button class="flex-1 py-md bg-secondary-container text-on-secondary uppercase font-bold rounded-lg shadow-lg" onclick="toggleModal()">Confirm Item</button>
+</div>
+</div>
+</div>
+<script>
+        // Simple micro-interactions
+        function toggleModal() {
+            const modal = document.getElementById('itemModal');
+            modal.classList.toggle('hidden');
+        }
+
+        // Simulating tap on table
+        document.querySelectorAll('.grid > div').forEach(table => {
+            table.addEventListener('click', () => {
+                if (table.classList.contains('bg-surface-container-highest/20')) {
+                    // Start new order for empty table
+                    toggleModal();
+                }
+            });
+        });
+
+        // Atmospheric Kitchen Notification Flash
+        setInterval(() => {
+            const ping = document.querySelector('.animate-ping');
+            if (ping) {
+                ping.classList.remove('animate-ping');
+                void ping.offsetWidth; // trigger reflow
+                ping.classList.add('animate-ping');
+            }
+        }, 5000);
+    </script>
+</body></html>

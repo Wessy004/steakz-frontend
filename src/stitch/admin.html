@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>STEAKZ HQ | Admin Dashboard</title>
+<script type='text/javascript' nonce='quA7M9iULdIGSaQ8fd+bnw==' src='https://contribution.usercontent.google.com/fDbvdg1071y2yIBFCOADt-d0DXVu940xifF0-8R7uzGYf8RqP8UimHkWCJ8Zj1nHIBkn-a-Lfet0VQ_odCgNRd8LwzrI7Ey-Tr6DShuRLo80ZVxUmjqztv9WswDvkeU7x4tOGVtLECGIoVkZXQh8BxrkZ96_xSF_MD02_m59BFut9g27vvuGnp4lXhXJwprdX7auqhin_uGMImtSBhfnS_fTkQgM50R2mnxoAUqBAAaIevqo5nYtzhz-R2qZ9VTbNLxGXbtlA22Xv_jrrYWuaKKc2zF93xoJR7adUcxttb4DnUd4L62Rii2xo1GGt27-p0Hj_DnBd2NvsCCQmhXyY6MpYywpV9LBIlyY_hC9dPPPsuDklcPOxMasPqKOGy3STrD7XecJGWoJ2oXRrowJs5zOeKp7SXLg67-9-cWz-9a_JDoDLdi3iFAVh8Fs9dngcBtcD1dMRsrqMQBx9T793bsuyCWkjh9GL47b-eQ-ljddJrexy7sdNbGXlmMRXLn-AuEBj2SFf9sD-BoppsB9PgG-ybe6uMr-kKZRg_3L-KLUwghoGOyaFcnecevNBbpee7wneKaLcvit08x4w5ce_7i_nbRIpmhAaUgziWg92naEq9Tu7qvZRZylXl3DjZnXeoytmWQs_MR53iUD5D6fcp917mqOS017QTt32HTLoN2mfL5PEs95e9pyOnYEYPPVsG7EnOXAdmr74WKBo9KVxKYqUG88NxizDvnvzVtFgymX25CpTByM2fCAHmiNZltQRkxnVXjvuAD0uNEfbrNGB317W_NCNwIIoG3XEFTe'></script><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #121414;
+            color: #e2e2e2;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-indicator {
+            position: absolute;
+            right: 0;
+            width: 2px;
+            height: 24px;
+            background-color: #ffb5a0;
+        }
+        /* Custom scrollbar for data-dense areas */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1a1c1c; }
+        ::-webkit-scrollbar-thumb { background: #333535; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff5625; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed": "#ffdad7",
+                      "on-primary": "#5a1a19",
+                      "on-secondary-fixed-variant": "#872000",
+                      "error": "#ffb4ab",
+                      "on-tertiary-container": "#8d8b8b",
+                      "tertiary-fixed-dim": "#c8c6c5",
+                      "primary-fixed-dim": "#ffb3ad",
+                      "on-primary-fixed-variant": "#77302d",
+                      "surface-tint": "#ffb3ad",
+                      "inverse-primary": "#954742",
+                      "on-secondary-fixed": "#3b0900",
+                      "surface-container-lowest": "#0c0f0f",
+                      "outline-variant": "#544341",
+                      "tertiary-fixed": "#e5e2e1",
+                      "error-container": "#93000a",
+                      "on-tertiary": "#313030",
+                      "secondary-fixed-dim": "#ffb5a0",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#1c1b1b",
+                      "secondary": "#ffb5a0",
+                      "inverse-on-surface": "#2f3131",
+                      "on-secondary": "#601400",
+                      "surface-variant": "#333535",
+                      "surface-container-highest": "#333535",
+                      "on-surface-variant": "#dac1bf",
+                      "surface": "#121414",
+                      "tertiary-container": "#242424",
+                      "on-secondary-container": "#541100",
+                      "primary-container": "#4a0e0e",
+                      "on-surface": "#e2e2e2",
+                      "on-tertiary-fixed-variant": "#474746",
+                      "tertiary": "#c8c6c5",
+                      "background": "#121414",
+                      "surface-container": "#1e2020",
+                      "surface-container-high": "#282a2b",
+                      "on-primary-fixed": "#3d0506",
+                      "surface-bright": "#38393a",
+                      "inverse-surface": "#e2e2e2",
+                      "secondary-fixed": "#ffdbd1",
+                      "secondary-container": "#ff5625",
+                      "surface-container-low": "#1a1c1c",
+                      "on-primary-container": "#cc726d",
+                      "outline": "#a28c8a",
+                      "surface-dim": "#121414",
+                      "on-error": "#690005",
+                      "on-background": "#e2e2e2",
+                      "primary": "#ffb3ad"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "sm": "12px",
+                      "lg": "40px",
+                      "gutter": "24px",
+                      "container-max": "1440px",
+                      "xl": "64px",
+                      "md": "24px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "mono-ui": ["Geist Mono"],
+                      "headline-md": ["Montserrat"],
+                      "display-lg": ["Montserrat"],
+                      "label-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg-mobile": ["Montserrat"],
+                      "body-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-lg": ["Montserrat"],
+                      "label-md": ["Inter"]
+              },
+              "fontSize": {
+                      "mono-ui": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-lg": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "label-md": ["12px", {"lineHeight": "1", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- SideNavBar Anchor -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container border-r border-outline-variant/20 shadow-sm flex flex-col py-md px-base z-50">
+<div class="mb-xl px-sm">
+<h1 class="font-headline-lg text-headline-lg font-bold text-secondary-container uppercase tracking-tighter">STEAKZ</h1>
+<p class="font-label-md text-label-md text-on-surface-variant/60 tracking-widest uppercase mt-1">Executive Suite</p>
+</div>
+<nav class="flex-grow space-y-2">
+<!-- HQ Active -->
+<a class="flex items-center gap-3 px-sm py-3 rounded-sm text-secondary font-bold border-r-2 border-secondary bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="analytics" style="font-variation-settings: &#39;FILL&#39; 1;">analytics</span>
+<span class="font-label-lg text-label-lg uppercase tracking-wider">HQ</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-3 rounded-sm text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label-lg text-label-lg uppercase tracking-wider">Branch</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-3 rounded-sm text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+<span class="font-label-lg text-label-lg uppercase tracking-wider">Chef</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-3 rounded-sm text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="person_raised_hand">person_raised_hand</span>
+<span class="font-label-lg text-label-lg uppercase tracking-wider">Waiter</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-3 rounded-sm text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-lg text-label-lg uppercase tracking-wider">Cashier</span>
+</a>
+</nav>
+<div class="mt-auto p-sm bg-surface-container-low rounded-lg flex items-center gap-3 border border-outline-variant/10">
+<img alt="Manager Profile" class="w-10 h-10 rounded-full object-cover grayscale contrast-125" data-alt="A professional headshot of a senior executive male in a dark designer suit, set against a dark, moody architectural background. High-contrast, sharp lighting accents his features, reflecting a high-end corporate noir aesthetic with deep blacks and sophisticated charcoal tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFRcNEYYtOWwP6TG09F-RY_LnpfTnSwNDMzRczRRfA5mrgssr9TlDU-FJvKqBWacX3tBvl3OCXv8AoPIB82iszOtr6ljvTbm5iqqOah_wWiLO8KSw6Kahvv1PSPFFkxV-gZh1K0KWvLy-FgGX5oIlpm7rsZQvbinW4cjA4a8L7q-1dEFEC-p6DPlVFFX8bAc3WsqTN9adhPzdJj4QcGpCfweA8hqP8cc5w6jdXUIGW36-r7_c8PJr39RAzDqyGg5fT5fc9qLby7OEm"/>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Admin Master</p>
+<p class="font-label-md text-label-md text-on-surface-variant">System Overseer</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar Anchor -->
+<header class="flex justify-between items-center w-full px-gutter h-xl bg-surface-container-low border-b border-outline-variant/10 sticky top-0 z-40">
+<div class="flex items-center gap-lg">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="bg-background border border-outline-variant/20 rounded-sm py-2 pl-10 pr-4 text-body-sm w-64 focus:outline-none focus:border-secondary transition-all" placeholder="Global system search..." type="text"/>
+</div>
+<nav class="hidden md:flex gap-md">
+<a class="font-label-lg text-label-lg text-secondary border-b-2 border-secondary pb-1 uppercase" href="#">Dashboard</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-secondary transition-opacity uppercase" href="#">Analytics</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-secondary transition-opacity uppercase" href="#">Inventory</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="flex items-center gap-2 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-sm font-label-lg uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all">
+                    Switch Branch
+                </button>
+<div class="flex gap-sm border-l border-outline-variant/20 pl-md">
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-secondary-container rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<section class="p-gutter max-w-container-max w-full mx-auto space-y-gutter">
+<!-- System Health Metrics (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="md:col-span-2 bg-surface-container p-md rounded-lg border border-outline-variant/10 flex justify-between items-end relative overflow-hidden group">
+<div class="z-10">
+<p class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">Mainframe Health</p>
+<h2 class="font-headline-lg text-headline-lg">99.98% <span class="text-on-surface-variant font-body-sm align-middle ml-2">UPTIME</span></h2>
+</div>
+<div class="flex gap-1 h-12 items-end z-10">
+<div class="w-1 bg-secondary h-full rounded-full animate-pulse"></div>
+<div class="w-1 bg-secondary h-3/4 rounded-full"></div>
+<div class="w-1 bg-secondary h-5/6 rounded-full"></div>
+<div class="w-1 bg-secondary h-4/5 rounded-full"></div>
+<div class="w-1 bg-secondary h-full rounded-full"></div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-[120px]" data-icon="dns">dns</span>
+</div>
+</div>
+<div class="bg-surface-container p-md rounded-lg border border-outline-variant/10">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-2">Active Terminals</p>
+<div class="flex items-center gap-4">
+<h2 class="font-headline-lg text-headline-lg font-mono-ui">142</h2>
+<span class="px-2 py-0.5 bg-green-900/30 text-green-400 text-[10px] font-bold rounded uppercase">Synced</span>
+</div>
+<div class="mt-4 w-full bg-background h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary w-3/4 h-full"></div>
+</div>
+</div>
+<div class="bg-surface-container p-md rounded-lg border border-outline-variant/10 flex flex-col justify-between">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Global Load</p>
+<div class="text-secondary-container">
+<span class="font-headline-md text-headline-md font-mono-ui">0.42</span>
+<span class="text-body-sm text-on-surface-variant ml-1">ms latency</span>
+</div>
+</div>
+</div>
+<!-- Branch Management Section -->
+<div class="space-y-sm">
+<div class="flex justify-between items-end">
+<div>
+<h3 class="font-headline-md text-headline-md uppercase">Branch Network</h3>
+<p class="font-body-sm text-on-surface-variant">UK-wide footprint management and deployment controls.</p>
+</div>
+<button class="bg-secondary-container text-on-secondary-container px-6 py-3 rounded-sm font-label-lg uppercase tracking-widest font-bold flex items-center gap-2 hover:brightness-110 transition-all shadow-lg shadow-secondary-container/20">
+<span class="material-symbols-outlined" data-icon="add_business">add_business</span>
+                        Add New Branch
+                    </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Branch Card 1 -->
+<div class="bg-surface-container border border-outline-variant/10 rounded-lg p-md hover:border-secondary/40 transition-colors group">
+<div class="flex justify-between items-start mb-base">
+<span class="px-2 py-1 bg-secondary/10 text-secondary text-[10px] font-extrabold uppercase tracking-tighter rounded">Flagship</span>
+<div class="flex gap-2">
+<button class="text-on-surface-variant hover:text-secondary transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span></button>
+<button class="text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="no_accounts">no_accounts</span></button>
+</div>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface group-hover:text-secondary transition-colors">London Central</h4>
+<p class="text-body-sm text-on-surface-variant mb-md">Mayfair, London | 24 Terminals</p>
+<hr class="border-outline-variant/10 mb-md"/>
+<div class="flex justify-between items-center">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-surface-container" data-alt="Close-up portrait of a female chef with a confident expression, professional attire, in a dimly lit high-end kitchen." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvYZQB-uazXII7aXo-55ZN6OJqzvUgX4HAHFNjW30RN7amMgwxGH9b0DU8dtJrTbDWUA9dBRiAmS2ua4mDpbLNot8HmvoyEE9SQZ0037m6eSBcZ-W7JcSTjAf0B908cYWAZs0Oqza-rm3e5vKfu60W8WjfCLSerGfE4yY8TDyQ7XK-F2rh_Qkw7DU2spdL-crQs_tgSu7AnJBFyoF-CowP7y2ft8I0kxbjDjw_R3z9G94CUqUPcfUZunM4CQ1GuiqGGJT4IEH0M8CW"/>
+<img class="w-8 h-8 rounded-full border-2 border-surface-container" data-alt="Portrait of a young waiter in a minimalist black uniform, professional lighting, urban restaurant background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmBbr_0U1G6JxUG-l6dobRwL7Jpvh3VFUqH1FxTSpiNNAh6AIBkbJ0RNvApt7pq6YZ1TOTstISFKToQtGOkW2J-yOq5-2z-i_QWTokSSo22KHh-3rwUcjqcoAFS7j9BCZw_1mZ6pys_deUTbqvom0VzfSMRVGeV57UAhFriCPhSRl1LvNN73INePK9oribiVKAPb14eFpTcdrC_DeqV9CA_1DwN93WspQuhkogbafj2TrmtII-rWveocxlodVliMgIDLq8zcQB2kaJ"/>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border-2 border-surface-container flex items-center justify-center text-[10px] text-on-surface-variant">+14</div>
+</div>
+<span class="flex items-center gap-1 text-[10px] text-green-400 font-bold uppercase"><span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span> Operational</span>
+</div>
+</div>
+<!-- Branch Card 2 -->
+<div class="bg-surface-container border border-outline-variant/10 rounded-lg p-md hover:border-secondary/40 transition-colors group">
+<div class="flex justify-between items-start mb-base">
+<span class="px-2 py-1 bg-on-tertiary-fixed-variant/20 text-on-tertiary-fixed-variant text-[10px] font-extrabold uppercase tracking-tighter rounded">Satellite</span>
+<div class="flex gap-2">
+<button class="text-on-surface-variant hover:text-secondary transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span></button>
+<button class="text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="no_accounts">no_accounts</span></button>
+</div>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface group-hover:text-secondary transition-colors">Manchester North</h4>
+<p class="text-body-sm text-on-surface-variant mb-md">Spinningfields | 18 Terminals</p>
+<hr class="border-outline-variant/10 mb-md"/>
+<div class="flex justify-between items-center">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-surface-container" data-alt="Portrait of an experienced male manager in a professional kitchen setting, dramatic lighting, dark corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-68Z0T8q_JordSdmFhTcUsZ-ldpWe_8O1XVPx2434QGKvTPAt0Q3VFVe_lp3XhLaFYSugyWLKf7tHTfAbu1yruMypeJrddh5B_EJI8o-5MmS67SZgLLjvcG-c3w3sOnm7XfVG5Na9QNwYFrvDXp7YoJsIBkpt9Sif30dYQmnEbyfmhRyGEInmXcVeKk4-umH_-EENdZ8j81RmqYW3eEPkjrbqY3oPMoXo994qw3HvAhjjFvhJ-2Z-F6Cjz20vvm318RRr3fMuF7Hz"/>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border-2 border-surface-container flex items-center justify-center text-[10px] text-on-surface-variant">+9</div>
+</div>
+<span class="flex items-center gap-1 text-[10px] text-green-400 font-bold uppercase"><span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span> Operational</span>
+</div>
+</div>
+<!-- Branch Card 3 (Deactivated State) -->
+<div class="bg-surface-container border border-outline-variant/10 rounded-lg p-md transition-colors opacity-60 grayscale">
+<div class="flex justify-between items-start mb-base">
+<span class="px-2 py-1 bg-error-container text-error text-[10px] font-extrabold uppercase tracking-tighter rounded">Offline</span>
+<div class="flex gap-2">
+<button class="text-on-surface-variant hover:text-secondary transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="refresh">refresh</span></button>
+</div>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Birmingham City</h4>
+<p class="text-body-sm text-on-surface-variant mb-md">The Mailbox | 12 Terminals</p>
+<hr class="border-outline-variant/10 mb-md"/>
+<div class="flex justify-between items-center">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase">Last Active: 14d ago</span>
+<span class="text-[10px] text-error font-bold uppercase">Deactivated</span>
+</div>
+</div>
+</div>
+</div>
+<!-- User & Role Management Table -->
+<div class="bg-surface-container border border-outline-variant/10 rounded-lg overflow-hidden">
+<div class="p-md flex justify-between items-center border-b border-outline-variant/10">
+<div>
+<h3 class="font-headline-md text-headline-md uppercase">Personnel Matrix</h3>
+<p class="font-body-sm text-on-surface-variant">Manage credentials and hierarchy across all UK operating units.</p>
+</div>
+<div class="flex gap-md">
+<button class="bg-transparent border border-secondary text-secondary px-4 py-2 rounded-sm font-label-lg uppercase tracking-wider hover:bg-secondary/10 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="person_add">person_add</span>
+                            Invite New Admin
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-high border-b border-outline-variant/20">
+<th class="px-md py-4 font-label-lg text-label-lg text-on-surface-variant uppercase tracking-widest">Employee</th>
+<th class="px-md py-4 font-label-lg text-label-lg text-on-surface-variant uppercase tracking-widest">Branch</th>
+<th class="px-md py-4 font-label-lg text-label-lg text-on-surface-variant uppercase tracking-widest">Current Role</th>
+<th class="px-md py-4 font-label-lg text-label-lg text-on-surface-variant uppercase tracking-widest">Status</th>
+<th class="px-md py-4 font-label-lg text-label-lg text-on-surface-variant uppercase tracking-widest text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- User Row 1 -->
+<tr class="hover:bg-surface-container-highest/50 transition-colors group">
+<td class="px-md py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-sm bg-surface-bright flex items-center justify-center font-bold text-secondary">AM</div>
+<div>
+<p class="text-on-surface font-semibold">Alessandro Moretti</p>
+<p class="text-on-surface-variant text-[12px] font-mono-ui">#EMP-42991</p>
+</div>
+</div>
+</td>
+<td class="px-md py-4">
+<span class="text-body-sm text-on-surface">London Central</span>
+</td>
+<td class="px-md py-4">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[11px] font-bold uppercase tracking-wider rounded-full">Executive Chef</span>
+</td>
+<td class="px-md py-4">
+<span class="text-body-sm text-green-400 flex items-center gap-1"><span class="w-1 h-1 bg-green-400 rounded-full"></span> Active</span>
+</td>
+<td class="px-md py-4 text-right">
+<button class="bg-background border border-outline-variant/20 hover:border-secondary px-3 py-1.5 rounded text-[11px] font-bold uppercase tracking-widest transition-all">Change Role</button>
+</td>
+</tr>
+<!-- User Row 2 -->
+<tr class="hover:bg-surface-container-highest/50 transition-colors group">
+<td class="px-md py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-sm bg-surface-bright flex items-center justify-center font-bold text-secondary">SC</div>
+<div>
+<p class="text-on-surface font-semibold">Sarah Chen</p>
+<p class="text-on-surface-variant text-[12px] font-mono-ui">#EMP-43012</p>
+</div>
+</div>
+</td>
+<td class="px-md py-4">
+<span class="text-body-sm text-on-surface">Manchester North</span>
+</td>
+<td class="px-md py-4">
+<span class="px-3 py-1 bg-surface-bright text-on-surface-variant text-[11px] font-bold uppercase tracking-wider rounded-full">Waiter</span>
+</td>
+<td class="px-md py-4">
+<span class="text-body-sm text-green-400 flex items-center gap-1"><span class="w-1 h-1 bg-green-400 rounded-full"></span> Active</span>
+</td>
+<td class="px-md py-4 text-right">
+<button class="bg-background border border-outline-variant/20 hover:border-secondary px-3 py-1.5 rounded text-[11px] font-bold uppercase tracking-widest transition-all">Change Role</button>
+</td>
+</tr>
+<!-- User Row 3 -->
+<tr class="hover:bg-surface-container-highest/50 transition-colors group">
+<td class="px-md py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-sm bg-surface-bright flex items-center justify-center font-bold text-secondary">RK</div>
+<div>
+<p class="text-on-surface font-semibold">Robert Kane</p>
+<p class="text-on-surface-variant text-[12px] font-mono-ui">#EMP-41002</p>
+</div>
+</div>
+</td>
+<td class="px-md py-4">
+<span class="text-body-sm text-on-surface">Manchester North</span>
+</td>
+<td class="px-md py-4">
+<span class="px-3 py-1 bg-primary-container text-on-primary-container text-[11px] font-bold uppercase tracking-wider rounded-full">Branch Manager</span>
+</td>
+<td class="px-md py-4">
+<span class="text-body-sm text-secondary flex items-center gap-1"><span class="w-1 h-1 bg-secondary rounded-full"></span> On Leave</span>
+</td>
+<td class="px-md py-4 text-right">
+<button class="bg-background border border-outline-variant/20 hover:border-secondary px-3 py-1.5 rounded text-[11px] font-bold uppercase tracking-widest transition-all">Change Role</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-md bg-surface-container-low flex justify-between items-center">
+<p class="text-[12px] text-on-surface-variant">Showing 3 of 152 system users</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded border border-outline-variant/20 flex items-center justify-center hover:bg-surface-bright disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded border border-outline-variant/20 flex items-center justify-center hover:bg-surface-bright">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Anchor -->
+<footer class="w-full py-lg mt-auto bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto gap-md">
+<div class="flex flex-col md:flex-row items-center gap-md">
+<span class="font-label-lg text-label-lg font-bold text-on-surface uppercase tracking-widest">STEAKZ HQ</span>
+<p class="font-body-sm text-body-sm text-on-tertiary-container uppercase tracking-tighter">© 2024 STEAKZ PREMIUM HOSPITALITY SYSTEMS</p>
+</div>
+<div class="flex gap-lg">
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary transition-colors uppercase" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary transition-colors uppercase" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary transition-colors uppercase" href="#">Support</a>
+</div>
+</div>
+</footer>
+</main>
+<script>
+        // Micro-interaction for hover states on Branch Cards
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Potential for adding subtle canvas particles or lighting shifts
+            });
+        });
+
+        // Search Bar Focus Effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.02]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.02]');
+        });
+    </script>
+</body></html>

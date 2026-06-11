@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>STEAKZ | Cashier Terminal</title>
+<script type='text/javascript' nonce='8IrzDhGltfQLMtRssiJw+A==' src='https://contribution.usercontent.google.com/g1HJPEmUNaE1kmLcOB4qIhdMkYlaAwHjdLXrKIJEGarlXBc1-BHhTZ2hk7tqTVC59HJtEYvxTARgqjcNX4s6rjdBFKQnuTW2i1_Y7GWB5CRtT6ZvQ7AHyVSmPPYoC67KTC6RSGtPyRc4QakSxoiXQBIhAA9SnSp-9SUVyh6rqIhJTIGVnfufDMqWIXCnPAvB9xrx9c7vSLsDghr443fGYPgovomGpgb43YfcZ7r39hteZ06njtrRRFyiDqcu_WUXrxmeXcHuw-s_W69Zv9BQTtCize-eeci_GeFanrG8YY3oh1A7zwkrekQApd_on1-SboWCFTaQponuNJtBqyQ6lziKaJPiktim1LPLCNcoUIeMw6dctc5xbSGYH0K35j8ALvvyPCDBxPP5CGsMdMeR5dRhJa9KiaVejPVIhePcdGKoq0DOIn6eYZRajcLa2ayvt7EsbzVoImMvNWEFHchjlE-jLAbfG7aoUneAe5zNO3Q_2SghbhDfuRNTHn8Yh9amIN0i44V36GShEEqvIa8opnSv8XwKWkA6N0mMBHyaUDL3m3xKylbKvE_PsdDSup8a1gWo1-aS0IkTslm1M9VNZb--5j3lpofKa3drf3ba35vxilU_UKcF76MhZSB13c9eWI5kh4xiWUWLTwwR7-uw0ELibIMlvsXqUy4qn5a5TS5LE0taYJdGu3Ok5-VpD0uGbxxXzM5BEQ9Ba5sZ-GrqGKpAj7ZrpaMMsopWWpKqOOlufLr-ugjaLNahB7EEsOT2DmgAyPV9eNV59zIdz0XY-4E4A-BkaWnJcRKqHHIq'></script><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#872000",
+                    "on-tertiary-container": "#8d8b8b",
+                    "surface-dim": "#121414",
+                    "on-primary-fixed": "#3d0506",
+                    "inverse-primary": "#954742",
+                    "outline-variant": "#544341",
+                    "on-secondary-container": "#541100",
+                    "tertiary-container": "#242424",
+                    "secondary-container": "#ff5625",
+                    "background": "#121414",
+                    "on-tertiary-fixed-variant": "#474746",
+                    "tertiary-fixed": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "inverse-on-surface": "#2f3131",
+                    "primary-container": "#4a0e0e",
+                    "primary-fixed-dim": "#ffb3ad",
+                    "surface-container-high": "#282a2b",
+                    "on-secondary": "#601400",
+                    "on-secondary-fixed": "#3b0900",
+                    "secondary-fixed": "#ffdbd1",
+                    "surface-container": "#1e2020",
+                    "surface-container-lowest": "#0c0f0f",
+                    "surface-container-highest": "#333535",
+                    "inverse-surface": "#e2e2e2",
+                    "on-primary-container": "#cc726d",
+                    "primary": "#ffb3ad",
+                    "error": "#ffb4ab",
+                    "secondary-fixed-dim": "#ffb5a0",
+                    "surface-container-low": "#1a1c1c",
+                    "on-primary": "#5a1a19",
+                    "surface-variant": "#333535",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "tertiary": "#c8c6c5",
+                    "on-primary-fixed-variant": "#77302d",
+                    "surface": "#121414",
+                    "outline": "#a28c8a",
+                    "on-surface-variant": "#dac1bf",
+                    "on-error": "#690005",
+                    "on-error-container": "#ffdad6",
+                    "primary-fixed": "#ffdad7",
+                    "on-surface": "#e2e2e2",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "on-background": "#e2e2e2",
+                    "surface-tint": "#ffb3ad",
+                    "surface-bright": "#38393a",
+                    "on-tertiary": "#313030",
+                    "secondary": "#ffb5a0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "base": "8px",
+                    "lg": "40px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "container-max": "1440px",
+                    "md": "24px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "display-lg": ["Montserrat"],
+                    "body-lg": ["Inter"],
+                    "mono-ui": ["Geist"],
+                    "headline-lg": ["Montserrat"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Montserrat"],
+                    "label-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "mono-ui": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-split-toggle {
+            background-color: #ff5625;
+            color: #ffffff;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1a1c1c; }
+        ::-webkit-scrollbar-thumb { background: #333535; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-hidden">
+<!-- SIDE NAV BAR -->
+<nav class="bg-surface-dim border-r border-outline-variant/20 h-screen w-64 fixed left-0 top-0 flex flex-col py-md px-base shadow-sm">
+<div class="mb-xl px-sm">
+<span class="font-headline-lg text-headline-lg font-bold text-secondary-container uppercase tracking-tighter">STEAKZ</span>
+<p class="font-label-lg text-label-lg text-on-tertiary-container mt-xs">Executive Suite</p>
+</div>
+<div class="space-y-xs flex-grow">
+<a class="flex items-center gap-sm px-sm py-md rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-lg text-label-lg">HQ</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-md rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label-lg text-label-lg">Branch</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-md rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+<span class="font-label-lg text-label-lg">Chef</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-md rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person_raised_hand">person_raised_hand</span>
+<span class="font-label-lg text-label-lg">Waiter</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-md rounded-lg text-secondary font-bold border-r-2 border-secondary bg-surface-container-high" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-lg text-label-lg">Cashier</span>
+</a>
+</div>
+<div class="mt-auto flex items-center gap-sm p-sm bg-surface-container-low rounded-xl">
+<img alt="Manager Profile" class="w-10 h-10 rounded-full grayscale contrast-125 object-cover" data-alt="A professional headshot of a confident restaurant manager in a sleek black uniform. The background is a blurred, high-end steakhouse interior with warm, low-key lighting. The lighting on the subject is sharp and dramatic, creating a sophisticated &#39;culinary noir&#39; atmosphere with high contrast and deep shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-7v29u4rAGJtKk9HfoRl4m7cDp9WKANLeYupd4YIKk0y8OVD_rTUXKdvlOtg1tchnuUySsYTGIg3YoIwq8AE8MnxJ00ZTN9SGMDb9lmNb8QdpJcWl4coARRXueL6Px_lFFyFjsRiJA2nRAP75n3UzR5mUaQ8mbRE8PvmE8mPgEpyn7kyiAB6BQ5_BTFDaHz5sGECmpK8h2Ld8gD0UyvnzC3172S27nRq-tA-YAqu8CcU_VlmWg0xN9O4wcIiI7zVgmwEUOW8hz6Wb"/>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Alex Mercer</p>
+<p class="text-[10px] uppercase tracking-widest text-on-tertiary-container">Terminal 04</p>
+</div>
+</div>
+</nav>
+<!-- TOP NAV BAR -->
+<header class="fixed top-0 left-64 right-0 bg-surface-container-low border-b border-outline-variant/10 h-16 flex justify-between items-center px-gutter z-10">
+<div class="flex items-center gap-lg">
+<span class="font-headline-md text-headline-md font-bold text-secondary uppercase">STEAKZ</span>
+<div class="relative w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="bg-surface-container-lowest border-none rounded-lg pl-10 pr-4 py-2 text-sm w-full focus:ring-1 focus:ring-secondary text-on-surface" placeholder="Search order, table, or guest..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex gap-sm">
+<button class="text-on-surface-variant hover:text-secondary transition-opacity"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="text-on-surface-variant hover:text-secondary transition-opacity"><span class="material-symbols-outlined" data-icon="settings">settings</span></button>
+</div>
+<button class="bg-secondary text-on-secondary px-base py-2 rounded-lg font-label-lg text-label-lg hover:opacity-90 transition-all active:scale-95">
+                Switch Branch
+            </button>
+</div>
+</header>
+<!-- MAIN CONTENT AREA (Bento-ish Grid) -->
+<main class="ml-64 mt-16 p-gutter h-[calc(100vh-64px)] grid grid-cols-12 gap-gutter overflow-hidden">
+<!-- LEFT: BILL VIEW & SPLIT CONTROLS -->
+<section class="col-span-4 flex flex-col gap-gutter h-full">
+<div class="bg-surface-container rounded-xl p-md flex flex-col h-full border border-outline-variant/10 shadow-sm">
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-headline-md text-headline-md flex items-center gap-sm">
+                        Table 12
+                        <span class="bg-secondary-container/20 text-secondary-container text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-widest">Active</span>
+</h2>
+<p class="text-on-tertiary-container font-mono-ui text-xs">#STK-2940</p>
+</div>
+<!-- Split Toggle -->
+<div class="bg-surface-container-lowest rounded-lg p-1 flex mb-md">
+<button class="flex-1 py-2 text-[10px] uppercase font-bold tracking-widest rounded-md active-split-toggle transition-all">Single Bill</button>
+<button class="flex-1 py-2 text-[10px] uppercase font-bold tracking-widest text-on-tertiary-container hover:text-on-surface transition-all">Split by Item</button>
+<button class="flex-1 py-2 text-[10px] uppercase font-bold tracking-widest text-on-tertiary-container hover:text-on-surface transition-all">Split by Guest</button>
+</div>
+<!-- Bill Items -->
+<div class="flex-grow overflow-y-auto pr-2 space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Ribeye 14oz <span class="text-secondary ml-1">×2</span></p>
+<p class="text-[10px] text-on-tertiary-container uppercase mt-0.5">Doneness: Medium Rare</p>
+</div>
+<p class="font-mono-ui text-on-surface">£124.00</p>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Truffle Mac &amp; Cheese</p>
+<p class="text-[10px] text-on-tertiary-container uppercase mt-0.5">Extra Truffle Shavings</p>
+</div>
+<p class="font-mono-ui text-on-surface">£18.50</p>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Wagyu Burger</p>
+<p class="text-[10px] text-on-tertiary-container uppercase mt-0.5">No Onions</p>
+</div>
+<p class="font-mono-ui text-on-surface">£28.00</p>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Old Fashioned <span class="text-secondary ml-1">×4</span></p>
+<p class="text-[10px] text-on-tertiary-container uppercase mt-0.5">Smoked Oak Base</p>
+</div>
+<p class="font-mono-ui text-on-surface">£72.00</p>
+</div>
+<div class="flex justify-between items-start border-t border-outline-variant/10 pt-4">
+<p class="font-label-lg text-label-lg text-on-tertiary-container uppercase">Service Charge (15%)</p>
+<p class="font-mono-ui text-on-tertiary-container">£36.38</p>
+</div>
+</div>
+<!-- Totals -->
+<div class="mt-md pt-md border-t border-outline-variant/40">
+<div class="flex justify-between items-center mb-1">
+<p class="font-label-lg text-label-lg text-on-tertiary-container">Subtotal</p>
+<p class="font-mono-ui text-on-tertiary-container">£242.50</p>
+</div>
+<div class="flex justify-between items-end">
+<p class="font-headline-md text-headline-md font-bold text-on-surface">TOTAL</p>
+<p class="font-display-lg text-[40px] leading-none text-secondary-container font-extrabold tracking-tighter">£278.88</p>
+</div>
+</div>
+</div>
+</section>
+<!-- CENTER: NUMERIC INPUT & PAYMENT SELECTION -->
+<section class="col-span-5 flex flex-col gap-gutter h-full">
+<!-- Numerical Input Pad -->
+<div class="bg-surface-container rounded-xl p-md border border-outline-variant/10 flex-grow flex flex-col">
+<div class="flex justify-between items-center mb-base">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-tertiary-container">Payment Amount</p>
+<button class="text-secondary font-label-lg text-label-lg">Clear All</button>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-md mb-md border border-secondary/20 shadow-inner">
+<span class="text-4xl font-display-lg text-on-surface font-extrabold tracking-tight">£ 278.88</span>
+</div>
+<div class="grid grid-cols-3 gap-2 flex-grow">
+<button class="bg-surface-container-highest rounded-lg font-headline-md text-on-surface hover:bg-secondary-container transition-all active:scale-95">1</button>
+<button class="bg-surface-container-highest rounded-lg font-headline-md text-on-surface hover:bg-secondary-container transition-all active:scale-95">2</button>
+<button class="bg-surface-container-highest rounded-lg font-headline-md text-on-surface hover:bg-secondary-container transition-all active:scale-95">3</button>
+<button class="bg-surface-container-highest rounded-lg font-headline-md text-on-surface hover:bg-secondary-container transition-all active:scale-95">4</button>
+<button class="bg-surface-container-highest rounded-lg font-headline-md text-on-surface hover:bg-secondary-container transition-all active:scale-95">5</button>
+<button class="bg-surface-container-highest rounded-lg font-headline-md text-on-surface hover:bg-secondary-container transition-all active:scale-95">6</button>
+<button class="bg-surface-container-highest rounded-lg font-headline-md text-on-surface hover:bg-secondary-container transition-all active:scale-95">7</button>
+<button class="bg-surface-container-highest rounded-lg font-headline-md text-on-surface hover:bg-secondary-container transition-all active:scale-95">8</button>
+<button class="bg-surface-container-highest rounded-lg font-headline-md text-on-surface hover:bg-secondary-container transition-all active:scale-95">9</button>
+<button class="bg-surface-container-highest rounded-lg font-headline-md text-on-surface hover:bg-secondary-container transition-all active:scale-95">.</button>
+<button class="bg-surface-container-highest rounded-lg font-headline-md text-on-surface hover:bg-secondary-container transition-all active:scale-95">0</button>
+<button class="bg-surface-container-highest rounded-lg font-headline-md text-on-surface hover:bg-secondary-container transition-all active:scale-95 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="backspace">backspace</span>
+</button>
+</div>
+</div>
+<!-- Payment Methods Grid -->
+<div class="grid grid-cols-3 gap-sm h-1/4">
+<button class="bg-surface-container rounded-xl border border-outline-variant/10 flex flex-col items-center justify-center gap-2 hover:bg-secondary-container/10 hover:border-secondary transition-all group">
+<span class="material-symbols-outlined text-secondary text-3xl group-hover:scale-110 transition-transform" data-icon="restaurant">restaurant</span>
+<span class="font-label-lg text-label-lg uppercase tracking-wider text-on-surface">Steakz App</span>
+</button>
+<button class="bg-surface-container rounded-xl border border-outline-variant/10 flex flex-col items-center justify-center gap-2 hover:bg-secondary-container/10 hover:border-secondary transition-all group border-secondary bg-secondary/5">
+<span class="material-symbols-outlined text-secondary text-3xl group-hover:scale-110 transition-transform" data-icon="credit_card">credit_card</span>
+<span class="font-label-lg text-label-lg uppercase tracking-wider text-on-surface">Credit/Debit</span>
+</button>
+<button class="bg-surface-container rounded-xl border border-outline-variant/10 flex flex-col items-center justify-center gap-2 hover:bg-secondary-container/10 hover:border-secondary transition-all group">
+<span class="material-symbols-outlined text-secondary text-3xl group-hover:scale-110 transition-transform" data-icon="payments">payments</span>
+<span class="font-label-lg text-label-lg uppercase tracking-wider text-on-surface">Cash</span>
+</button>
+</div>
+</section>
+<!-- RIGHT: RECEIPT PREVIEW -->
+<section class="col-span-3 h-full flex flex-col">
+<div class="bg-[#f5f5f5] text-[#1a1a1a] p-gutter rounded-lg shadow-xl relative overflow-hidden flex-grow flex flex-col max-h-[700px] transform rotate-1 scale-95 origin-top-right">
+<!-- Receipt Jagged Top -->
+<div class="absolute top-0 left-0 right-0 h-2 bg-white" style="clip-path: polygon(0 100%, 5% 0, 10% 100%, 15% 0, 20% 100%, 25% 0, 30% 100%, 35% 0, 40% 100%, 45% 0, 50% 100%, 55% 0, 60% 100%, 65% 0, 70% 100%, 75% 0, 80% 100%, 85% 0, 90% 100%, 95% 0, 100% 100%);"></div>
+<div class="text-center mb-lg pt-4">
+<h1 class="font-headline-md text-headline-md font-extrabold uppercase tracking-tighter">STEAKZ</h1>
+<p class="text-[10px] font-semibold tracking-widest uppercase opacity-70">Premium Hospitality Systems</p>
+<p class="text-[10px] mt-2 opacity-60">122 Industrial Way, Downtown District<br/>Order #2940 | 10.24.2024</p>
+</div>
+<div class="border-y border-dashed border-[#1a1a1a]/30 py-md flex-grow overflow-hidden">
+<div class="space-y-3">
+<div class="flex justify-between text-[11px] font-bold">
+<span>2 × RIBEYE 14OZ</span>
+<span class="font-mono-ui">124.00</span>
+</div>
+<div class="flex justify-between text-[11px] font-bold">
+<span>1 × TRUFFLE MAC</span>
+<span class="font-mono-ui">18.50</span>
+</div>
+<div class="flex justify-between text-[11px] font-bold">
+<span>1 × WAGYU BURGER</span>
+<span class="font-mono-ui">28.00</span>
+</div>
+<div class="flex justify-between text-[11px] font-bold">
+<span>4 × OLD FASHIONED</span>
+<span class="font-mono-ui">72.00</span>
+</div>
+</div>
+<div class="mt-xl pt-4 border-t border-[#1a1a1a]/10 space-y-1">
+<div class="flex justify-between text-[10px] opacity-60">
+<span>SUBTOTAL</span>
+<span class="font-mono-ui">242.50</span>
+</div>
+<div class="flex justify-between text-[10px] opacity-60">
+<span>SVC CHRG (15%)</span>
+<span class="font-mono-ui">36.38</span>
+</div>
+<div class="flex justify-between text-base font-extrabold pt-2">
+<span>TOTAL DUE</span>
+<span class="font-mono-ui">£278.88</span>
+</div>
+</div>
+</div>
+<div class="mt-auto text-center pt-md">
+<img alt="QR Code" class="w-24 h-24 mx-auto mb-md mix-blend-multiply opacity-80" data-alt="A sharp, minimalist QR code centered on a clean white paper receipt background. The QR code is printed in rich black ink with perfect geometric alignment. Surrounding the code is a subtle texture of high-quality thermal paper. The overall lighting is flat and neutral, emphasizing the utilitarian yet sophisticated design of the payment receipt." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx-qjV72-rLUlobeN2ABwnWGJAHJ8kt-FzGi5tPd5xryaK_mv_HtHzmU-SUIZsC_MS54lbtc30AGC987UjBBZrZa7yahVoJ4s8Qp2RtzexuGB-lHHJht_cljOVCQDsCv7kKwFQXxoQ-9NrZD2-j9QlsuNXHyRK9QNCpqFgOhTEzXnqfvX7R_hybHB6mVe7hTy4DpU3sMEt1xpaOTzn5Z3rB-FxaIVKU4L3U89m1AjjBsT0KDmkXCxgKNt3GPaMy1RY7eWXTR5T7-YK"/>
+<p class="text-[10px] font-bold tracking-widest uppercase opacity-70">Pay via App for 5% Rewards</p>
+<p class="text-[11px] mt-4 font-body-sm italic opacity-50">Thank you for dining at Steakz.</p>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-gutter grid grid-cols-2 gap-sm">
+<button class="bg-surface-container-highest border border-outline-variant/20 py-4 rounded-xl font-label-lg text-label-lg flex items-center justify-center gap-2 hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined" data-icon="print">print</span> Print
+                </button>
+<button class="bg-secondary-container text-on-secondary px-base py-4 rounded-xl font-headline-md text-on-primary-container font-extrabold uppercase tracking-tighter hover:scale-105 active:scale-95 transition-all shadow-lg shadow-secondary-container/20">
+                    COMPLETE
+                </button>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="fixed bottom-0 left-64 right-0 bg-surface-container-lowest border-t border-outline-variant/20 h-12 flex justify-between items-center px-gutter z-10">
+<p class="font-label-md text-label-md text-on-tertiary-container uppercase tracking-widest">© 2024 STEAKZ PREMIUM HOSPITALITY SYSTEMS</p>
+<div class="flex gap-lg">
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary transition-colors uppercase tracking-widest" href="#">Support</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary transition-colors uppercase tracking-widest" href="#">Privacy Policy</a>
+</div>
+</footer>
+<script>
+        // Micro-interactions for button presses
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('active:scale-95');
+            });
+        });
+
+        // Atmospheric fade-in
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.8s ease-out';
+        window.onload = () => {
+            document.body.style.opacity = '1';
+        };
+    </script>
+</body></html>

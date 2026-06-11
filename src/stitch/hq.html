@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>STEAKZ | HQ Executive Suite</title>
+<script type='text/javascript' nonce='qERF+zoBK8kpabyRAYgHOA==' src='https://contribution.usercontent.google.com/iND9dPCNwJTepPwJ9KQnbTHFgEAid18d0D4RU_WxNaUjSWOWOwZU0hkxfyEEQdUfAJb-W2j0gwTzNSgw-5UC1qnLid0MM7EBt2DXdtqYIak1aV-H6jUkZrFLb99MrhP01DZ-GhbobQVksjpuALknr-qyRM6Lg1VZ2IIqTDdxfveL_vaQ4JtuOBV5tZphKgX5oLu9xNQ6EMSy9mmG6uVCvXUiOPU4DqgGOPw7CPw1Ts-0y9TKiGRJk6XeiRoqdKie8Dfj1aBHSQ1n-WMRcia6tdbJBFO_NaKS7le7lQM9V4zRZ73lcCxKSiMR63MzWJxe6xdPF8G23oM2Fuyg5I7VJwArq7nyA4dL6FLOVrPTwdAy9ytzpwMBGJDm54K5-Bi0wKs1rji-UfcxtwEwGDrZzPw11rFmsBCl40IKboLC1sQv_ApZreK3nwreykHrNs6G0PxiQhYdiGauijo_I3QA2kL7Mlg-pqTM0T0oVkYlawPlAdotonk3xJcsZj0H93TX-lgY4O_aJ8JCZ_0KtqwxkyFABkVpo8PHN2vT9O7ttkTIsAPDNY_mig8ngo4HcMGpppIoss3PWhai7asxZGfuXZe7v9KkoQzlWvm7ZqdsKZt0yVAM39bIAEQns0aoadUa43TYPpLLIwCShnXQECsADgWFkBQGZIy-RBr3aycz2uLN0Kxp3hJJw6pQATFMwrAk-9I-dMDhn9o4UbinhbQQ-tyN03J99KAe8aaBRXgcn_P73e5cw1P3fgC9h-ETI16praZCMG4XiLpuyDYo0g9o8ChchVO1JrF977A2PeAo'></script><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400;
+        }
+        /* Custom scrollbar for a kitchen-noir feel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #121414; }
+        ::-webkit-scrollbar-thumb { background: #333535; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff5625; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#872000",
+                      "on-tertiary-container": "#8d8b8b",
+                      "surface-dim": "#121414",
+                      "on-primary-fixed": "#3d0506",
+                      "inverse-primary": "#954742",
+                      "outline-variant": "#544341",
+                      "on-secondary-container": "#541100",
+                      "tertiary-container": "#242424",
+                      "secondary-container": "#ff5625",
+                      "background": "#121414",
+                      "on-tertiary-fixed-variant": "#474746",
+                      "tertiary-fixed": "#e5e2e1",
+                      "error-container": "#93000a",
+                      "inverse-on-surface": "#2f3131",
+                      "primary-container": "#4a0e0e",
+                      "primary-fixed-dim": "#ffb3ad",
+                      "surface-container-high": "#282a2b",
+                      "on-secondary": "#601400",
+                      "on-secondary-fixed": "#3b0900",
+                      "secondary-fixed": "#ffdbd1",
+                      "surface-container": "#1e2020",
+                      "surface-container-lowest": "#0c0f0f",
+                      "surface-container-highest": "#333535",
+                      "inverse-surface": "#e2e2e2",
+                      "on-primary-container": "#cc726d",
+                      "primary": "#ffb3ad",
+                      "error": "#ffb4ab",
+                      "secondary-fixed-dim": "#ffb5a0",
+                      "surface-container-low": "#1a1c1c",
+                      "on-primary": "#5a1a19",
+                      "surface-variant": "#333535",
+                      "tertiary-fixed-dim": "#c8c6c5",
+                      "tertiary": "#c8c6c5",
+                      "on-primary-fixed-variant": "#77302d",
+                      "surface": "#121414",
+                      "outline": "#a28c8a",
+                      "on-surface-variant": "#dac1bf",
+                      "on-error": "#690005",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed": "#ffdad7",
+                      "on-surface": "#e2e2e2",
+                      "on-tertiary-fixed": "#1c1b1b",
+                      "on-background": "#e2e2e2",
+                      "surface-tint": "#ffb3ad",
+                      "surface-bright": "#38393a",
+                      "on-tertiary": "#313030",
+                      "secondary": "#ffb5a0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xl": "64px",
+                      "base": "8px",
+                      "lg": "40px",
+                      "sm": "12px",
+                      "xs": "4px",
+                      "container-max": "1440px",
+                      "md": "24px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "body-sm": ["Inter"],
+                      "display-lg": ["Montserrat"],
+                      "body-lg": ["Inter"],
+                      "mono-ui": ["Geist Mono"],
+                      "headline-lg": ["Montserrat"],
+                      "label-md": ["Inter"],
+                      "headline-lg-mobile": ["Montserrat"],
+                      "body-md": ["Inter"],
+                      "headline-md": ["Montserrat"],
+                      "label-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "mono-ui": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "label-md": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "label-lg": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-dim border-r border-outline-variant/20 flex flex-col py-md px-base z-50">
+<div class="mb-xl px-base">
+<h1 class="font-headline-lg text-headline-lg font-bold text-secondary-container uppercase tracking-tighter">STEAKZ</h1>
+<p class="font-label-lg text-label-lg text-on-tertiary-container mt-xs">Executive Suite</p>
+</div>
+<nav class="flex-1 space-y-xs">
+<!-- HQ Active Tab -->
+<a class="flex items-center gap-sm px-base py-sm text-secondary font-bold border-r-2 border-secondary bg-surface-container-high transition-colors scale-95 duration-150" href="#">
+<span class="material-symbols-outlined active-nav-icon" data-icon="analytics" style="font-variation-settings: &#39;FILL&#39; 1;">analytics</span>
+<span class="font-label-lg text-label-lg">HQ</span>
+</a>
+<a class="flex items-center gap-sm px-base py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label-lg text-label-lg">Branch</span>
+</a>
+<a class="flex items-center gap-sm px-base py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+<span class="font-label-lg text-label-lg">Chef</span>
+</a>
+<a class="flex items-center gap-sm px-base py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person_raised_hand">person_raised_hand</span>
+<span class="font-label-lg text-label-lg">Waiter</span>
+</a>
+<a class="flex items-center gap-sm px-base py-sm text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-lg text-label-lg">Cashier</span>
+</a>
+</nav>
+<div class="mt-auto px-base py-md flex items-center gap-sm border-t border-outline-variant/10">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="Manager Profile" class="w-full h-full object-cover" data-alt="A professional headshot of an executive restaurant manager in a dark, charcoal-colored suit. The lighting is low-key and dramatic, reflecting a sophisticated culinary noir aesthetic. The background consists of a blurred, upscale steakhouse interior with warm copper accents and dark leather textures. The mood is authoritative and sharp." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ2wCduvBCjALrYCPam_KwUfK2yRtjGwZ_iJGS9gVJccQ-6xyTrAiewjdntPi8POjkcuQB4unlM1DneIYtTT-Gk6bnQ-0Z_1tvIwyPSKUtSnDm_iCVljFA5IdaLJAv69I8FJIVyS9OGLWrAyOBwdGEtJ7Z3AI-OtE00bbKcT9FRqVdw755a90htUXbg5D8Wu4B9OleQUQzhoSUHue4k_zloeDwOSMJpW2cSqLSJlI2ESZxGf3hNUZsJhnN6pqNaxMd5chd55RTPRck"/>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Alex Mercer</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Global Ops</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar Component -->
+<header class="flex justify-between items-center w-full px-gutter h-[64px] bg-surface-container-low border-b border-outline-variant/10 sticky top-0 z-40">
+<div class="flex items-center gap-lg">
+<h2 class="font-headline-md text-headline-md font-bold text-secondary uppercase">DASHBOARD</h2>
+<div class="hidden lg:flex gap-md">
+<a class="font-label-lg text-label-lg text-secondary border-b-2 border-secondary pb-1" href="#">Dashboard</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-secondary transition-opacity" href="#">Analytics</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-secondary transition-opacity" href="#">Inventory</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="bg-surface-container-lowest border border-outline-variant/20 rounded-lg pl-10 pr-4 py-2 font-body-sm text-body-sm focus:border-secondary-container focus:ring-0 transition-all w-64" placeholder="Global Search..." type="text"/>
+</div>
+<div class="flex items-center gap-base">
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="ml-base px-md py-2 bg-secondary-container text-on-secondary font-bold font-label-lg rounded uppercase hover:opacity-80 transition-all">
+                        Switch Branch
+                    </button>
+</div>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<div class="p-gutter max-w-container-max mx-auto w-full space-y-lg">
+<!-- Contextual Header & Date Picker -->
+<section class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">System Overview</h3>
+<p class="font-body-md text-body-md text-on-tertiary-container">Real-time revenue and operational performance across the portfolio.</p>
+</div>
+<div class="flex items-center gap-base bg-surface-container p-1 rounded-lg border border-outline-variant/20">
+<button class="px-md py-2 rounded font-label-md text-label-md text-on-tertiary-container hover:text-on-surface transition-colors">7 Days</button>
+<button class="px-md py-2 rounded font-label-md text-label-md bg-secondary-container text-on-secondary font-bold">Last 30 Days</button>
+<button class="px-md py-2 rounded font-label-md text-label-md text-on-tertiary-container hover:text-on-surface transition-colors">Quarterly</button>
+<button class="px-md py-2 flex items-center gap-xs rounded font-label-md text-label-md text-on-tertiary-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="calendar_today">calendar_today</span>
+                        Custom
+                    </button>
+</div>
+</section>
+<!-- KPI Cards -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-surface-container-low p-md rounded-xl border border-outline-variant/10 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-md opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl" data-icon="payments">payments</span>
+</div>
+<p class="font-label-lg text-label-lg text-on-tertiary-container uppercase tracking-widest">Total Revenue</p>
+<div class="mt-base flex items-baseline gap-base">
+<h4 class="font-headline-lg text-headline-lg font-mono-ui">£4,821,090</h4>
+<span class="font-label-md text-label-md text-secondary-container">+12.4%</span>
+</div>
+<div class="mt-md h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-3/4"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-md rounded-xl border border-outline-variant/10 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-md opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl" data-icon="shopping_cart">shopping_cart</span>
+</div>
+<p class="font-label-lg text-label-lg text-on-tertiary-container uppercase tracking-widest">Avg Order Value</p>
+<div class="mt-base flex items-baseline gap-base">
+<h4 class="font-headline-lg text-headline-lg font-mono-ui">£142.50</h4>
+<span class="font-label-md text-label-md text-secondary-container">+4.1%</span>
+</div>
+<div class="mt-md h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-1/2"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-md rounded-xl border border-outline-variant/10 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-md opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl" data-icon="bolt">bolt</span>
+</div>
+<p class="font-label-lg text-label-lg text-on-tertiary-container uppercase tracking-widest">Op Efficiency</p>
+<div class="mt-base flex items-baseline gap-base">
+<h4 class="font-headline-lg text-headline-lg font-mono-ui">94.2%</h4>
+<span class="font-label-md text-label-md text-secondary-container">+2.8%</span>
+</div>
+<div class="mt-md h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-11/12"></div>
+</div>
+</div>
+</section>
+<!-- Comparison Widget & Performance Chart -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Multi-branch Performance Chart -->
+<div class="lg:col-span-8 bg-surface-container-low p-md rounded-xl border border-outline-variant/10 shadow-sm">
+<div class="flex justify-between items-center mb-lg">
+<h5 class="font-headline-md text-headline-md">Revenue Trend per Location</h5>
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-xs">
+<span class="w-3 h-3 rounded-full bg-secondary-container"></span>
+<span class="font-label-md text-label-md text-on-surface-variant">London</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="w-3 h-3 rounded-full bg-outline"></span>
+<span class="font-label-md text-label-md text-on-surface-variant">Manchester</span>
+</div>
+</div>
+</div>
+<!-- Chart Placeholder Visual -->
+<div class="h-64 flex items-end gap-2 relative">
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-10">
+<div class="border-t border-on-surface w-full h-px"></div>
+<div class="border-t border-on-surface w-full h-px"></div>
+<div class="border-t border-on-surface w-full h-px"></div>
+<div class="border-t border-on-surface w-full h-px"></div>
+</div>
+<div class="flex-1 flex flex-col gap-2 group cursor-pointer h-full justify-end">
+<div class="w-full bg-secondary-container/40 rounded-t h-[60%] hover:bg-secondary-container transition-all"></div>
+<div class="w-full bg-outline/20 rounded-t h-[40%] hover:bg-outline/40 transition-all"></div>
+<p class="text-center font-label-md text-label-md text-on-tertiary-container mt-2">WK 1</p>
+</div>
+<div class="flex-1 flex flex-col gap-2 group cursor-pointer h-full justify-end">
+<div class="w-full bg-secondary-container/40 rounded-t h-[75%] hover:bg-secondary-container transition-all"></div>
+<div class="w-full bg-outline/20 rounded-t h-[50%] hover:bg-outline/40 transition-all"></div>
+<p class="text-center font-label-md text-label-md text-on-tertiary-container mt-2">WK 2</p>
+</div>
+<div class="flex-1 flex flex-col gap-2 group cursor-pointer h-full justify-end">
+<div class="w-full bg-secondary-container/40 rounded-t h-[85%] hover:bg-secondary-container transition-all"></div>
+<div class="w-full bg-outline/20 rounded-t h-[65%] hover:bg-outline/40 transition-all"></div>
+<p class="text-center font-label-md text-label-md text-on-tertiary-container mt-2">WK 3</p>
+</div>
+<div class="flex-1 flex flex-col gap-2 group cursor-pointer h-full justify-end">
+<div class="w-full bg-secondary-container/40 rounded-t h-[70%] hover:bg-secondary-container transition-all"></div>
+<div class="w-full bg-outline/20 rounded-t h-[60%] hover:bg-outline/40 transition-all"></div>
+<p class="text-center font-label-md text-label-md text-on-tertiary-container mt-2">WK 4</p>
+</div>
+</div>
+</div>
+<!-- Comparison Widget -->
+<div class="lg:col-span-4 bg-surface-container p-md rounded-xl border border-secondary-container/20 shadow-lg flex flex-col justify-between">
+<div class="space-y-base">
+<h5 class="font-headline-md text-headline-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary-container" data-icon="compare_arrows">compare_arrows</span>
+                            Benchmarking
+                        </h5>
+<p class="font-body-sm text-body-sm text-on-tertiary-container">Direct comparison between UK flagship hubs.</p>
+</div>
+<div class="my-md space-y-md">
+<!-- Revenue Comparison -->
+<div class="space-y-xs">
+<div class="flex justify-between font-label-lg text-label-lg">
+<span class="text-secondary-container">London</span>
+<span class="text-on-surface-variant">Manchester</span>
+</div>
+<div class="h-2 flex w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full w-[68%]"></div>
+<div class="bg-outline h-full w-[32%] border-l border-surface"></div>
+</div>
+<div class="flex justify-between font-mono-ui text-sm">
+<span>£2.8M</span>
+<span>£1.3M</span>
+</div>
+</div>
+<!-- Table Turn -->
+<div class="space-y-xs">
+<div class="flex justify-between font-label-lg text-label-lg text-on-surface">
+<span>Table Turn</span>
+<span class="font-mono-ui">1.7h vs 1.9h</span>
+</div>
+<div class="h-2 flex w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full w-[47%]"></div>
+<div class="bg-outline h-full w-[53%] border-l border-surface"></div>
+</div>
+</div>
+<!-- Rating -->
+<div class="space-y-xs">
+<div class="flex justify-between font-label-lg text-label-lg text-on-surface">
+<span>Guest Rating</span>
+<span class="font-mono-ui">4.9 vs 4.7</span>
+</div>
+<div class="h-2 flex w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full w-[98%]"></div>
+<div class="bg-outline h-full w-[94%] border-l border-surface"></div>
+</div>
+</div>
+</div>
+<button class="w-full py-3 border border-secondary-container/50 text-secondary-container font-bold uppercase font-label-lg hover:bg-secondary-container hover:text-on-secondary transition-all">
+                        Full UK Regional Report
+                    </button>
+</div>
+</section>
+<!-- Asymmetric Bento Grid Section -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- Location Cards -->
+<div class="md:col-span-2 bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/10 flex flex-col group">
+<div class="h-48 relative overflow-hidden">
+<img alt="Steakhouse Interior" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A cinematic, wide-angle shot of a premium steakhouse kitchen during service. The image features a large wood-fired grill with glowing orange embers and sparks. Chefs in clean black uniforms are meticulously plating marbled steaks. The lighting is moody with high contrast, heavy shadows, and warm orange highlights on stainless steel surfaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI0prQwMRs-CgZfTisqN1kfe3NPkS6zYN89iufBJgI5AuSiIChE6eI5hPEdtgdAHzx00-DaU2j8AJURW_vfHi6RdjIuaJqnlrLLCnA_yXADc-Tf2MjJS2Bjw05lbmGFWJIuCWmv9DFHOz3v16kkAY_iZICiuk7_R-h5QAajS4qiUkNAF-zcqkGlyjIiRefi_UW5alcEa2xyjhwIPCpgoe6l7_bXe5gs7sVeg0SRKoN1CyoBE2Yf8qeKhI2qPQ6d0Lbrh2TAsR9Qq7G"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="px-base py-1 bg-secondary-container text-on-secondary font-bold text-xs uppercase rounded">Flagship</span>
+<h6 class="font-headline-md text-headline-md text-white mt-1">London - Soho</h6>
+</div>
+</div>
+<div class="p-md space-y-base">
+<div class="flex justify-between items-center border-b border-outline-variant/10 pb-base">
+<span class="font-label-lg text-label-lg text-on-tertiary-container">Live Occupancy</span>
+<span class="font-mono-ui text-secondary-container">92%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-lg text-label-lg text-on-tertiary-container">Pending Orders</span>
+<span class="font-mono-ui">18</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-1 bg-surface-container-low p-md rounded-xl border border-outline-variant/10 space-y-md">
+<h6 class="font-label-lg text-label-lg text-on-tertiary-container uppercase tracking-widest">Inventory Alerts</h6>
+<div class="space-y-sm">
+<div class="p-sm bg-surface-container rounded border-l-4 border-error flex items-center gap-sm">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+<div>
+<p class="font-label-md text-label-md">Dry-Aged Ribeye Low</p>
+<p class="text-xs text-on-tertiary-container">London Stock: 8.5kg</p>
+</div>
+</div>
+<div class="p-sm bg-surface-container rounded border-l-4 border-secondary-container flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary-container" data-icon="info">info</span>
+<div>
+<p class="font-label-md text-label-md">Wine Order Pending</p>
+<p class="text-xs text-on-tertiary-container">English Sparkling x24</p>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-1 bg-secondary-container p-md rounded-xl text-on-secondary flex flex-col justify-between relative overflow-hidden group">
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl opacity-20 group-hover:rotate-12 transition-transform" data-icon="restaurant_menu">restaurant_menu</span>
+<h6 class="font-headline-md text-headline-md leading-tight">Executive Action Center</h6>
+<div class="space-y-xs">
+<p class="font-body-sm text-body-sm opacity-90">4 New menu approvals required from Manchester Head Chef.</p>
+<button class="mt-base bg-on-secondary text-secondary-container font-bold px-md py-2 text-sm uppercase rounded hover:bg-surface-dim transition-colors">Review Tasks</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Component -->
+<footer class="w-full py-lg mt-auto bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto gap-md">
+<div class="flex items-center gap-md">
+<p class="font-label-lg text-label-lg font-bold text-on-surface">STEAKZ</p>
+<p class="font-body-sm text-body-sm text-on-tertiary-container">© 2024 STEAKZ PREMIUM HOSPITALITY SYSTEMS</p>
+</div>
+<div class="flex gap-lg">
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary" href="#">Support</a>
+</div>
+</div>
+</footer>
+</main>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('.group').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                // Potential for adding JS-driven effects like canvas particles or sound cues
+            });
+        });
+        
+        // Simple mock for "Switch Branch"
+        document.querySelector('button')?.addEventListener('click', (e) => {
+            if(e.target.innerText.includes("SWITCH BRANCH")) {
+                alert('Opening UK Branch Selection Modal...');
+            }
+        });
+    </script>
+</body></html>
