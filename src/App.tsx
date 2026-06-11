@@ -108,6 +108,15 @@ type BackendOrder = {
   items: Array<{ menuItemId: number; quantity: number; unitPrice: number }>;
 };
 
+type BackendMenuItem = {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  isActive: boolean;
+  categoryId: number;
+};
+
 type SignInShortcut = {
   id: number;
   label: string;
@@ -135,7 +144,7 @@ const navItems: Array<{ view: View; label: string; roles: Role[]; icon: LucideIc
   { view: "payments", label: "Cashier", roles: ["CASHIER"], icon: CreditCard }
 ];
 
-const menuItems: CartItem[] = [
+const fallbackMenuItems: CartItem[] = [
   { id: 1, name: "Signature Ribeye", meta: "Medium rare + peppercorn", price: 54, quantity: 1 },
   { id: 2, name: "Steakz Burger", meta: "Smoked cheddar + relish", price: 14.5, quantity: 1 },
   { id: 3, name: "Truffle Mac", meta: "Extra shavings", price: 18.5, quantity: 1 },
@@ -195,7 +204,7 @@ function orderPayloadItems(items: CartItem[]): Array<{ menuItemId: number; quant
   return items.map((item) => ({ menuItemId: item.id, quantity: item.quantity }));
 }
 
-function priceForTicketItem(name: string, ticket: Ticket): number {
+function priceForTicketItem(name: string, ticket: Ticket, menuItems: CartItem[]): number {
   return menuItems.find((item) => item.name === name)?.price ?? ticket.total / Math.max(ticket.items.length, 1);
 }
 
@@ -237,6 +246,16 @@ function mapTable(table: BackendTable): DiningTable {
   };
 }
 
+function mapMenuItem(item: BackendMenuItem): CartItem {
+  return {
+    id: item.id,
+    name: item.name,
+    meta: item.description,
+    price: Number(item.price),
+    quantity: 1
+  };
+}
+
 function mapAdminPerson(user: ApiUser, branches: Branch[]): AdminPerson {
   return {
     id: user.id ?? user.userId ?? 0,
@@ -258,7 +277,7 @@ function ticketStatus(status: BackendOrder["status"]): Ticket["status"] | null {
   return null;
 }
 
-function mapTicket(order: BackendOrder, tables: DiningTable[]): Ticket | null {
+function mapTicket(order: BackendOrder, tables: DiningTable[], menuItems: CartItem[]): Ticket | null {
   const status = ticketStatus(order.status);
   if (!status) return null;
   const table = tables.find((candidate) => candidate.id === order.tableId);
@@ -730,12 +749,12 @@ function BranchView({ setNotice, tickets, branches, tables }: { setNotice: (noti
   </section>;
 }
 
-function OrdersView({ role, tickets, setTickets, setNotice, tables, branches }: { role: Role; tickets: Ticket[]; setTickets: (tickets: Ticket[]) => void; setNotice: (notice: string) => void; tables: DiningTable[]; branches: Branch[] }) {
-  if (role === "WAITER") return <WaiterView tickets={tickets} setTickets={setTickets} setNotice={setNotice} tables={tables} />;
-  return <CustomerView tickets={tickets} setTickets={setTickets} setNotice={setNotice} tables={tables} branches={branches} />;
+function OrdersView({ role, tickets, setTickets, setNotice, tables, branches, menuItems }: { role: Role; tickets: Ticket[]; setTickets: (tickets: Ticket[]) => void; setNotice: (notice: string) => void; tables: DiningTable[]; branches: Branch[]; menuItems: CartItem[] }) {
+  if (role === "WAITER") return <WaiterView tickets={tickets} setTickets={setTickets} setNotice={setNotice} tables={tables} menuItems={menuItems} />;
+  return <CustomerView tickets={tickets} setTickets={setTickets} setNotice={setNotice} tables={tables} branches={branches} menuItems={menuItems} />;
 }
 
-function CustomerView({ tickets, setTickets, setNotice, tables, branches }: { tickets: Ticket[]; setTickets: (tickets: Ticket[]) => void; setNotice: (notice: string) => void; tables: DiningTable[]; branches: Branch[] }) {
+function CustomerView({ tickets, setTickets, setNotice, tables, branches, menuItems }: { tickets: Ticket[]; setTickets: (tickets: Ticket[]) => void; setNotice: (notice: string) => void; tables: DiningTable[]; branches: Branch[]; menuItems: CartItem[] }) {
   const { user } = useAuth();
   const [cart, setCart] = useState<CartItem[]>([]);
   const [selectedBranchId, setSelectedBranchId] = useState(tables[0]?.branchId ?? branches[0]?.id ?? 0);
@@ -794,13 +813,13 @@ function CustomerView({ tickets, setTickets, setNotice, tables, branches }: { ti
   return <section className="page-grid"><PageTitle eyebrow="Guest Experience" title="Order & Pay" status={selectedTable ? `${branchName(selectedBranchId, branches)} table ${selectedTable.number}` : "No table"} /><div className="customer-grid"><article className="hero-food"><span className="eyebrow">Tonight's menu</span><h2>Build your order from the Steakz grill</h2><p>Select a branch and table, add the dishes you want, then send the order to the waiter.</p><strong>{cart.length ? formatCurrency(total) : "No items selected"}</strong></article><div className="menu-list"><div className="table-selector"><span className="eyebrow">Branch</span>{branches.filter((branch) => tables.some((table) => table.branchId === branch.id)).map((branch) => <button className={selectedBranchId === branch.id ? "selected" : ""} key={branch.id} type="button" onClick={() => setSelectedBranchId(branch.id)}><strong>{branch.city}</strong><span>{branch.name}</span></button>)}</div><div className="table-selector"><span className="eyebrow">Your table</span>{branchTables.length ? branchTables.map((table) => <button className={selectedTableId === table.id ? "selected" : ""} key={table.id} type="button" onClick={() => setSelectedTableId(table.id)}><strong>{table.number}</strong><span>{table.seats} seats</span></button>) : <div className="modal-line">No tables available for this branch.</div>}</div>{menuItems.map((item) => <article className="menu-row" key={item.id}><div><h3>{item.name}</h3><p>{item.meta}</p></div><strong>{formatCurrency(item.price)}</strong><button type="button" onClick={() => addItem(item)}><Plus size={18} /></button></article>)}</div><aside className="order-drawer"><h2>Current Order</h2><div className="receipt-line"><span>Branch</span><strong>{branchName(selectedBranchId, branches)}</strong></div><div className="receipt-line"><span>Table</span><strong>{selectedTable?.number ?? "None"}</strong></div>{cart.length ? cart.map((item, index) => <div className="receipt-line" key={`${item.id}-${index}`}><span>{item.name}</span><strong>{formatCurrency(item.price)}</strong></div>) : <div className="modal-line">No items selected yet.</div>}<div className="receipt-total"><span>Total</span><strong>{formatCurrency(total)}</strong></div><button className="primary-button" type="button" onClick={() => void placeOrder()} disabled={cart.length === 0 || !selectedTable}>Place Order</button></aside></div></section>;
 }
 
-function WaiterView({ tickets, setTickets, setNotice, tables }: { tickets: Ticket[]; setTickets: (tickets: Ticket[]) => void; setNotice: (notice: string) => void; tables: DiningTable[] }) {
+function WaiterView({ tickets, setTickets, setNotice, tables, menuItems }: { tickets: Ticket[]; setTickets: (tickets: Ticket[]) => void; setNotice: (notice: string) => void; tables: DiningTable[]; menuItems: CartItem[] }) {
   const { user } = useAuth();
   const waiterBranchId = user?.role === "WAITER" && typeof user.branchId === "number" ? user.branchId : null;
   const branchTables = useMemo(() => tables.filter((table) => table.branchId === waiterBranchId), [tables, waiterBranchId]);
   const [selectedTableId, setSelectedTableId] = useState(tables[0]?.id ?? 0);
   const [tableOrders, setTableOrders] = useState<Record<number, CartItem[]>>({});
-  const [selectedMenuItemId, setSelectedMenuItemId] = useState(menuItems[0].id);
+  const [selectedMenuItemId, setSelectedMenuItemId] = useState(menuItems[0]?.id ?? 0);
   const visibleTickets = tickets.filter((ticket) => ticket.branchId === waiterBranchId);
   const selectedTable = branchTables.find((table) => table.id === selectedTableId) ?? branchTables[0] ?? null;
   const items = selectedTable ? tableOrders[selectedTable.id] ?? [] : [];
@@ -809,7 +828,7 @@ function WaiterView({ tickets, setTickets, setNotice, tables }: { tickets: Ticke
   const pendingTotal = useMemo(() => pendingGuestTickets.reduce((sum, ticket) => sum + ticket.total, 0), [pendingGuestTickets]);
   const total = localTotal + pendingTotal;
   const hasOrderWork = items.length > 0 || pendingGuestTickets.length > 0;
-  const selectedMenuItem = menuItems.find((item) => item.id === selectedMenuItemId) ?? menuItems[0];
+  const selectedMenuItem = menuItems.find((item) => item.id === selectedMenuItemId) ?? menuItems[0] ?? null;
 
   useEffect(() => {
     if (branchTables.length && !branchTables.some((table) => table.id === selectedTableId)) {
@@ -817,9 +836,19 @@ function WaiterView({ tickets, setTickets, setNotice, tables }: { tickets: Ticke
     }
   }, [branchTables, selectedTableId]);
 
+  useEffect(() => {
+    if (menuItems.length && !menuItems.some((item) => item.id === selectedMenuItemId)) {
+      setSelectedMenuItemId(menuItems[0].id);
+    }
+  }, [menuItems, selectedMenuItemId]);
+
   function addSelectedItem(): void {
     if (!selectedTable) {
       setNotice("No table is assigned to this waiter branch.");
+      return;
+    }
+    if (!selectedMenuItem) {
+      setNotice("No menu items are available to add.");
       return;
     }
 
@@ -919,7 +948,7 @@ function KitchenView({ tickets, setTickets, setNotice, branches }: { tickets: Ti
   return <section className="page-grid"><PageTitle eyebrow="Kitchen Display" title="Kitchen Orders" status="Fire line active" /><div className="ticket-grid">{kitchenTickets.length ? kitchenTickets.map((ticket) => <article className="ticket-card" key={ticket.id}><div className="tag-row"><span className="tag">#{ticket.id}</span><span>{ticket.time}</span></div><h2>{ticket.table}</h2><span className="eyebrow">{ticket.status}</span>{ticket.items.map((item) => <div className="modal-line" key={item}>{item}</div>)}<button className="primary-button" type="button" onClick={() => void markReady(ticket)} disabled={ticket.status === "Ready"}>Mark Ready</button></article>) : <article className="ticket-card"><span className="eyebrow">Queue clear</span><h2>No kitchen orders</h2><div className="modal-line">Waiter-sent orders for {branchName(user?.branchId, branches)} will appear here.</div></article>}</div></section>;
 }
 
-function PaymentsView({ tickets, setTickets, setNotice }: { tickets: Ticket[]; setTickets: (tickets: Ticket[]) => void; setNotice: (notice: string) => void }) {
+function PaymentsView({ tickets, setTickets, setNotice, menuItems }: { tickets: Ticket[]; setTickets: (tickets: Ticket[]) => void; setNotice: (notice: string) => void; menuItems: CartItem[] }) {
   const { user } = useAuth();
   const payableTickets = tickets.filter((ticket) => (user?.branchId === null || ticket.branchId === user?.branchId) && ticket.status === "Ready");
   const [selectedTicketId, setSelectedTicketId] = useState<number | null>(payableTickets[0]?.id ?? null);
@@ -980,7 +1009,7 @@ function PaymentsView({ tickets, setTickets, setNotice }: { tickets: Ticket[]; s
     setNotice(`Receipt preview shown for table ${selectedTicket.table}.`);
   }
 
-  return <section className="page-grid"><PageTitle eyebrow="Cashier Terminal" title="Checkout System" status={selectedTicket ? `Table ${selectedTicket.table} active` : "No ready orders"} /><div className="cashier-grid"><article className="bill-panel"><h2>{selectedTicket ? `Table ${selectedTicket.table}` : "Ready Orders"}</h2><div className="payment-methods">{payableTickets.length ? payableTickets.map((ticket) => <button className={selectedTicket?.id === ticket.id ? "selected" : ""} key={ticket.id} type="button" onClick={() => setSelectedTicketId(ticket.id)}>{ticket.table} #{ticket.id}</button>) : <button type="button" disabled>No ready orders</button>}</div>{selectedTicket ? <><div className="receipt-line"><span>Customer</span><strong>{selectedTicket.customer}</strong></div>{selectedTicket.items.map((item, index) => <div className="receipt-line" key={`${item}-${index}`}><span>{item}</span><strong>{formatCurrency(priceForTicketItem(item, selectedTicket))}</strong></div>)}<div className="receipt-line"><span>Service Charge</span><strong>{formatCurrency(service)}</strong></div><div className="receipt-total"><span>Total</span><strong>{formatCurrency(subtotal + service)}</strong></div></> : <div className="modal-line">Mark an order ready in the chef page first.</div>}</article><article className="keypad-panel"><span className="eyebrow">Payment Amount</span><div className="amount-display">{formatCurrency(Number(amount || "0"))}</div><div className="keypad">{["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"].map((key) => <button key={key} type="button" onClick={() => keyPress(key)}>{key}</button>)}<button type="button" onClick={() => keyPress("back")}><Minus size={18} /></button></div><div className="payment-methods">{["Steakz App", "Credit/Debit", "Cash"].map((item) => <button className={method === item ? "selected" : ""} key={item} type="button" onClick={() => setMethod(item)}>{item}</button>)}</div></article><aside className="paper-receipt"><h2>STEAKZ</h2><p>{selectedTicket ? `${selectedTicket.table} | ${selectedTicket.customer}` : "No active bill"}</p><div className="receipt-total"><span>Total Due</span><strong>{formatCurrency(Number(amount || "0"))}</strong></div><button className="secondary-button" type="button" onClick={printReceipt} disabled={!selectedTicket}><Printer size={18} /> Print</button><button className="primary-button" type="button" onClick={() => void complete()} disabled={!selectedTicket}>Complete</button></aside></div>{printedReceipt ? <div className="modal-backdrop" role="dialog" aria-modal="true" aria-label="Printed receipt preview"><article className="modal-card paper-receipt"><h2>PRINTED RECEIPT</h2><p>{printedReceipt.ticket.table} | {printedReceipt.ticket.customer}</p><div className="receipt-line"><span>Order</span><strong>#{printedReceipt.ticket.id}</strong></div><div className="receipt-line"><span>Payment</span><strong>{printedReceipt.method}</strong></div>{printedReceipt.ticket.items.map((item, index) => <div className="receipt-line" key={`printed-${item}-${index}`}><span>{item}</span><strong>{formatCurrency(priceForTicketItem(item, printedReceipt.ticket))}</strong></div>)}<div className="receipt-line"><span>Subtotal</span><strong>{formatCurrency(printedReceipt.subtotal)}</strong></div><div className="receipt-line"><span>Service Charge</span><strong>{formatCurrency(printedReceipt.service)}</strong></div><div className="receipt-total"><span>Printed Total</span><strong>{formatCurrency(Number(printedReceipt.amount || "0"))}</strong></div><button className="secondary-button compact" type="button" onClick={() => setPrintedReceipt(null)}>Close Receipt</button></article></div> : null}</section>;
+  return <section className="page-grid"><PageTitle eyebrow="Cashier Terminal" title="Checkout System" status={selectedTicket ? `Table ${selectedTicket.table} active` : "No ready orders"} /><div className="cashier-grid"><article className="bill-panel"><h2>{selectedTicket ? `Table ${selectedTicket.table}` : "Ready Orders"}</h2><div className="payment-methods">{payableTickets.length ? payableTickets.map((ticket) => <button className={selectedTicket?.id === ticket.id ? "selected" : ""} key={ticket.id} type="button" onClick={() => setSelectedTicketId(ticket.id)}>{ticket.table} #{ticket.id}</button>) : <button type="button" disabled>No ready orders</button>}</div>{selectedTicket ? <><div className="receipt-line"><span>Customer</span><strong>{selectedTicket.customer}</strong></div>{selectedTicket.items.map((item, index) => <div className="receipt-line" key={`${item}-${index}`}><span>{item}</span><strong>{formatCurrency(priceForTicketItem(item, selectedTicket, menuItems))}</strong></div>)}<div className="receipt-line"><span>Service Charge</span><strong>{formatCurrency(service)}</strong></div><div className="receipt-total"><span>Total</span><strong>{formatCurrency(subtotal + service)}</strong></div></> : <div className="modal-line">Mark an order ready in the chef page first.</div>}</article><article className="keypad-panel"><span className="eyebrow">Payment Amount</span><div className="amount-display">{formatCurrency(Number(amount || "0"))}</div><div className="keypad">{["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"].map((key) => <button key={key} type="button" onClick={() => keyPress(key)}>{key}</button>)}<button type="button" onClick={() => keyPress("back")}><Minus size={18} /></button></div><div className="payment-methods">{["Steakz App", "Credit/Debit", "Cash"].map((item) => <button className={method === item ? "selected" : ""} key={item} type="button" onClick={() => setMethod(item)}>{item}</button>)}</div></article><aside className="paper-receipt"><h2>STEAKZ</h2><p>{selectedTicket ? `${selectedTicket.table} | ${selectedTicket.customer}` : "No active bill"}</p><div className="receipt-total"><span>Total Due</span><strong>{formatCurrency(Number(amount || "0"))}</strong></div><button className="secondary-button" type="button" onClick={printReceipt} disabled={!selectedTicket}><Printer size={18} /> Print</button><button className="primary-button" type="button" onClick={() => void complete()} disabled={!selectedTicket}>Complete</button></aside></div>{printedReceipt ? <div className="modal-backdrop" role="dialog" aria-modal="true" aria-label="Printed receipt preview"><article className="modal-card paper-receipt"><h2>PRINTED RECEIPT</h2><p>{printedReceipt.ticket.table} | {printedReceipt.ticket.customer}</p><div className="receipt-line"><span>Order</span><strong>#{printedReceipt.ticket.id}</strong></div><div className="receipt-line"><span>Payment</span><strong>{printedReceipt.method}</strong></div>{printedReceipt.ticket.items.map((item, index) => <div className="receipt-line" key={`printed-${item}-${index}`}><span>{item}</span><strong>{formatCurrency(priceForTicketItem(item, printedReceipt.ticket, menuItems))}</strong></div>)}<div className="receipt-line"><span>Subtotal</span><strong>{formatCurrency(printedReceipt.subtotal)}</strong></div><div className="receipt-line"><span>Service Charge</span><strong>{formatCurrency(printedReceipt.service)}</strong></div><div className="receipt-total"><span>Printed Total</span><strong>{formatCurrency(Number(printedReceipt.amount || "0"))}</strong></div><button className="secondary-button compact" type="button" onClick={() => setPrintedReceipt(null)}>Close Receipt</button></article></div> : null}</section>;
 }
 
 export function App() {
@@ -992,6 +1021,7 @@ export function App() {
   const [tables, setTables] = useState<DiningTable[]>(initialDiningTables);
   const [adminUsers, setAdminUsers] = useState<AdminPerson[]>(initialAdminPeople);
   const [dashboardReport, setDashboardReport] = useState<DashboardReport | null>(null);
+  const [menuItems, setMenuItems] = useState<CartItem[]>(fallbackMenuItems);
 
   useEffect(() => {
     if (user) setView(roleHome[user.role]);
@@ -1006,20 +1036,23 @@ export function App() {
     async function loadRoleData(): Promise<void> {
       try {
         if (activeUser.role === "ADMIN") {
-          const [branchResponse, userResponse, dashboardResponse, tableResponse, orderResponse] = await Promise.all([
+          const [branchResponse, userResponse, dashboardResponse, tableResponse, orderResponse, menuResponse] = await Promise.all([
             api.get<ApiResponse<BackendBranch[]>>("/admin/branches"),
             api.get<ApiResponse<ApiUser[]>>("/admin/users"),
             api.get<ApiResponse<DashboardReport>>("/headquarters/dashboard"),
             api.get<ApiResponse<BackendTable[]>>("/headquarters/tables"),
-            api.get<ApiResponse<BackendOrder[]>>("/headquarters/orders")
+            api.get<ApiResponse<BackendOrder[]>>("/headquarters/orders"),
+            api.get<ApiResponse<BackendMenuItem[]>>("/headquarters/menu-items")
           ]);
           if (cancelled) return;
           const nextBranches = branchResponse.data.success ? branchResponse.data.data.map(mapBranch) : initialBranches;
           const nextTables = tableResponse.data.success ? tableResponse.data.data.map(mapTable) : initialDiningTables;
+          const nextMenuItems = menuResponse.data.success ? menuResponse.data.data.filter((item) => item.isActive).map(mapMenuItem) : fallbackMenuItems;
           setBranches(nextBranches);
           setTables(nextTables);
+          setMenuItems(nextMenuItems);
           if (dashboardResponse.data.success) setDashboardReport(dashboardResponse.data.data);
-          if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables)).filter((ticket): ticket is Ticket => ticket !== null));
+          if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables, nextMenuItems)).filter((ticket): ticket is Ticket => ticket !== null));
           if (userResponse.data.success) {
             setAdminUsers(userResponse.data.data.filter((candidate) => candidate.role !== "CUSTOMER").map((candidate) => mapAdminPerson(candidate, nextBranches)));
           }
@@ -1027,18 +1060,21 @@ export function App() {
         }
 
         if (activeUser.role === "HEADQUARTERS_MANAGER") {
-          const [branchResponse, dashboardResponse, tableResponse, orderResponse] = await Promise.all([
+          const [branchResponse, dashboardResponse, tableResponse, orderResponse, menuResponse] = await Promise.all([
             api.get<ApiResponse<BackendBranch[]>>("/headquarters/branches"),
             api.get<ApiResponse<DashboardReport>>("/headquarters/dashboard"),
             api.get<ApiResponse<BackendTable[]>>("/headquarters/tables"),
-            api.get<ApiResponse<BackendOrder[]>>("/headquarters/orders")
+            api.get<ApiResponse<BackendOrder[]>>("/headquarters/orders"),
+            api.get<ApiResponse<BackendMenuItem[]>>("/headquarters/menu-items")
           ]);
           if (cancelled) return;
           const nextTables = tableResponse.data.success ? tableResponse.data.data.map(mapTable) : initialDiningTables;
+          const nextMenuItems = menuResponse.data.success ? menuResponse.data.data.filter((item) => item.isActive).map(mapMenuItem) : fallbackMenuItems;
           if (branchResponse.data.success) setBranches(branchResponse.data.data.map(mapBranch));
           setTables(nextTables);
+          setMenuItems(nextMenuItems);
           if (dashboardResponse.data.success) setDashboardReport(dashboardResponse.data.data);
-          if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables)).filter((ticket): ticket is Ticket => ticket !== null));
+          if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables, nextMenuItems)).filter((ticket): ticket is Ticket => ticket !== null));
           return;
         }
 
@@ -1052,19 +1088,22 @@ export function App() {
           const nextTables = tableResponse.data.success ? tableResponse.data.data.map(mapTable) : [];
           setTables(nextTables);
           if (dashboardResponse.data.success) setDashboardReport(dashboardResponse.data.data);
-          if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables)).filter((ticket): ticket is Ticket => ticket !== null));
+          if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables, menuItems)).filter((ticket): ticket is Ticket => ticket !== null));
           return;
         }
 
         if (activeUser.role === "WAITER") {
-          const [tableResponse, orderResponse] = await Promise.all([
+          const [tableResponse, orderResponse, menuResponse] = await Promise.all([
             api.get<ApiResponse<BackendTable[]>>("/waiter/tables"),
-            api.get<ApiResponse<BackendOrder[]>>("/waiter/orders")
+            api.get<ApiResponse<BackendOrder[]>>("/waiter/orders"),
+            api.get<ApiResponse<BackendMenuItem[]>>("/waiter/menu")
           ]);
           if (cancelled) return;
           const nextTables = tableResponse.data.success ? tableResponse.data.data.map(mapTable) : [];
+          const nextMenuItems = menuResponse.data.success ? menuResponse.data.data.map(mapMenuItem) : fallbackMenuItems;
           setTables(nextTables);
-          if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables)).filter((ticket): ticket is Ticket => ticket !== null));
+          setMenuItems(nextMenuItems);
+          if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables, nextMenuItems)).filter((ticket): ticket is Ticket => ticket !== null));
           return;
         }
 
@@ -1076,7 +1115,7 @@ export function App() {
           if (cancelled) return;
           const nextTables = tableResponse.data.success ? tableResponse.data.data.map(mapTable) : [];
           setTables(nextTables);
-          if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables)).filter((ticket): ticket is Ticket => ticket !== null));
+          if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables, menuItems)).filter((ticket): ticket is Ticket => ticket !== null));
           return;
         }
 
@@ -1090,19 +1129,22 @@ export function App() {
           const nextTables = tableResponse.data.success ? tableResponse.data.data.map(mapTable) : [];
           setTables(nextTables);
           if (dashboardResponse.data.success) setDashboardReport({ branches: 1, users: 1, orders: orderResponse.data.success ? orderResponse.data.data.length : 0, payments: dashboardResponse.data.data.count, salesTotal: dashboardResponse.data.data.total });
-          if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables)).filter((ticket): ticket is Ticket => ticket !== null));
+          if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables, menuItems)).filter((ticket): ticket is Ticket => ticket !== null));
           return;
         }
 
         if (activeUser.role === "CUSTOMER") {
-          const [tableResponse, orderResponse] = await Promise.all([
+          const [tableResponse, orderResponse, menuResponse] = await Promise.all([
             api.get<ApiResponse<BackendTable[]>>("/customer/tables"),
-            api.get<ApiResponse<BackendOrder[]>>("/customer/orders")
+            api.get<ApiResponse<BackendOrder[]>>("/customer/orders"),
+            api.get<ApiResponse<BackendMenuItem[]>>("/customer/menu")
           ]);
           if (cancelled) return;
           const nextTables = tableResponse.data.success ? tableResponse.data.data.map(mapTable) : [];
+          const nextMenuItems = menuResponse.data.success ? menuResponse.data.data.map(mapMenuItem) : fallbackMenuItems;
           setTables(nextTables);
-          if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables)).filter((ticket): ticket is Ticket => ticket !== null));
+          setMenuItems(nextMenuItems);
+          if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables, nextMenuItems)).filter((ticket): ticket is Ticket => ticket !== null));
         }
       } catch {
         if (!cancelled) setNotice("Could not load live data for this role.");
@@ -1125,8 +1167,8 @@ export function App() {
     {actualView === "admin" ? <AdminView branches={branches} setBranches={setBranches} tables={tables} setTables={setTables} users={adminUsers} setUsers={setAdminUsers} setNotice={setNotice} /> : null}
     {actualView === "hq" ? <HqView tickets={tickets} branches={branches} tables={tables} dashboardReport={dashboardReport} /> : null}
     {actualView === "branch" ? <BranchView setNotice={setNotice} tickets={tickets} branches={branches} tables={tables} /> : null}
-    {actualView === "orders" ? <OrdersView role={role} tickets={tickets} setTickets={setTickets} setNotice={setNotice} tables={tables} branches={branches} /> : null}
+    {actualView === "orders" ? <OrdersView role={role} tickets={tickets} setTickets={setTickets} setNotice={setNotice} tables={tables} branches={branches} menuItems={menuItems} /> : null}
     {actualView === "kitchen" ? <KitchenView tickets={tickets} setTickets={setTickets} setNotice={setNotice} branches={branches} /> : null}
-    {actualView === "payments" ? <PaymentsView tickets={tickets} setTickets={setTickets} setNotice={setNotice} /> : null}
+    {actualView === "payments" ? <PaymentsView tickets={tickets} setTickets={setTickets} setNotice={setNotice} menuItems={menuItems} /> : null}
   </Shell>;
 }
