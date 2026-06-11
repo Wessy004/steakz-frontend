@@ -42,6 +42,8 @@ type CartItem = {
   meta: string;
   price: number;
   quantity: number;
+  categoryId: number;
+  categoryName: string;
 };
 
 type Ticket = {
@@ -117,6 +119,12 @@ type BackendMenuItem = {
   categoryId: number;
 };
 
+type BackendMenuCategory = {
+  id: number;
+  name: string;
+  description: string;
+};
+
 type SignInShortcut = {
   id: number;
   label: string;
@@ -145,10 +153,10 @@ const navItems: Array<{ view: View; label: string; roles: Role[]; icon: LucideIc
 ];
 
 const fallbackMenuItems: CartItem[] = [
-  { id: 1, name: "Signature Ribeye", meta: "Medium rare + peppercorn", price: 54, quantity: 1 },
-  { id: 2, name: "Steakz Burger", meta: "Smoked cheddar + relish", price: 14.5, quantity: 1 },
-  { id: 3, name: "Truffle Mac", meta: "Extra shavings", price: 18.5, quantity: 1 },
-  { id: 4, name: "Old Fashioned", meta: "Smoked oak base", price: 18, quantity: 1 }
+  { id: 1, name: "Signature Ribeye", meta: "Medium rare + peppercorn", price: 54, quantity: 1, categoryId: 2, categoryName: "Steaks" },
+  { id: 2, name: "Steakz Burger", meta: "Smoked cheddar + relish", price: 14.5, quantity: 1, categoryId: 3, categoryName: "Burgers" },
+  { id: 3, name: "Truffle Mac", meta: "Extra shavings", price: 18.5, quantity: 1, categoryId: 4, categoryName: "Sides" },
+  { id: 4, name: "Old Fashioned", meta: "Smoked oak base", price: 18, quantity: 1, categoryId: 5, categoryName: "Drinks" }
 ];
 
 const initialBranches: Branch[] = [
@@ -246,14 +254,26 @@ function mapTable(table: BackendTable): DiningTable {
   };
 }
 
-function mapMenuItem(item: BackendMenuItem): CartItem {
+function mapMenuItem(item: BackendMenuItem, categories: BackendMenuCategory[] = []): CartItem {
+  const categoryName = categories.find((category) => category.id === item.categoryId)?.name ?? `Category ${item.categoryId}`;
   return {
     id: item.id,
     name: item.name,
     meta: item.description,
     price: Number(item.price),
-    quantity: 1
+    quantity: 1,
+    categoryId: item.categoryId,
+    categoryName
   };
+}
+
+function groupMenuItems(items: CartItem[]): Array<{ categoryId: number; categoryName: string; items: CartItem[] }> {
+  return Array.from(items.reduce((groups, item) => {
+    const group = groups.get(item.categoryId) ?? { categoryId: item.categoryId, categoryName: item.categoryName, items: [] };
+    group.items.push(item);
+    groups.set(item.categoryId, group);
+    return groups;
+  }, new Map<number, { categoryId: number; categoryName: string; items: CartItem[] }>()).values());
 }
 
 function mapAdminPerson(user: ApiUser, branches: Branch[]): AdminPerson {
@@ -760,6 +780,7 @@ function CustomerView({ tickets, setTickets, setNotice, tables, branches, menuIt
   const [selectedBranchId, setSelectedBranchId] = useState(tables[0]?.branchId ?? branches[0]?.id ?? 0);
   const [selectedTableId, setSelectedTableId] = useState(tables[0]?.id ?? 0);
   const total = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.quantity, 0), [cart]);
+  const menuGroups = useMemo(() => groupMenuItems(menuItems), [menuItems]);
   const branchTables = useMemo(() => tables.filter((table) => table.branchId === selectedBranchId), [selectedBranchId, tables]);
   const selectedTable = branchTables.find((table) => table.id === selectedTableId) ?? branchTables[0] ?? null;
 
@@ -810,7 +831,7 @@ function CustomerView({ tickets, setTickets, setNotice, tables, branches, menuIt
     }, ...tickets]);
   }
 
-  return <section className="page-grid"><PageTitle eyebrow="Guest Experience" title="Order & Pay" status={selectedTable ? `${branchName(selectedBranchId, branches)} table ${selectedTable.number}` : "No table"} /><div className="customer-grid"><article className="hero-food"><span className="eyebrow">Tonight's menu</span><h2>Build your order from the Steakz grill</h2><p>Select a branch and table, add the dishes you want, then send the order to the waiter.</p><strong>{cart.length ? formatCurrency(total) : "No items selected"}</strong></article><div className="menu-list"><div className="table-selector"><span className="eyebrow">Branch</span>{branches.filter((branch) => tables.some((table) => table.branchId === branch.id)).map((branch) => <button className={selectedBranchId === branch.id ? "selected" : ""} key={branch.id} type="button" onClick={() => setSelectedBranchId(branch.id)}><strong>{branch.city}</strong><span>{branch.name}</span></button>)}</div><div className="table-selector"><span className="eyebrow">Your table</span>{branchTables.length ? branchTables.map((table) => <button className={selectedTableId === table.id ? "selected" : ""} key={table.id} type="button" onClick={() => setSelectedTableId(table.id)}><strong>{table.number}</strong><span>{table.seats} seats</span></button>) : <div className="modal-line">No tables available for this branch.</div>}</div>{menuItems.map((item) => <article className="menu-row" key={item.id}><div><h3>{item.name}</h3><p>{item.meta}</p></div><strong>{formatCurrency(item.price)}</strong><button type="button" onClick={() => addItem(item)}><Plus size={18} /></button></article>)}</div><aside className="order-drawer"><h2>Current Order</h2><div className="receipt-line"><span>Branch</span><strong>{branchName(selectedBranchId, branches)}</strong></div><div className="receipt-line"><span>Table</span><strong>{selectedTable?.number ?? "None"}</strong></div>{cart.length ? cart.map((item, index) => <div className="receipt-line" key={`${item.id}-${index}`}><span>{item.name}</span><strong>{formatCurrency(item.price)}</strong></div>) : <div className="modal-line">No items selected yet.</div>}<div className="receipt-total"><span>Total</span><strong>{formatCurrency(total)}</strong></div><button className="primary-button" type="button" onClick={() => void placeOrder()} disabled={cart.length === 0 || !selectedTable}>Place Order</button></aside></div></section>;
+  return <section className="page-grid"><PageTitle eyebrow="Guest Experience" title="Order & Pay" status={selectedTable ? `${branchName(selectedBranchId, branches)} table ${selectedTable.number}` : "No table"} /><div className="customer-grid"><article className="hero-food"><span className="eyebrow">Tonight's menu</span><h2>Build your order from the Steakz grill</h2><p>Select a branch and table, add the dishes you want, then send the order to the waiter.</p><strong>{cart.length ? formatCurrency(total) : "No items selected"}</strong></article><div className="menu-list"><div className="table-selector"><span className="eyebrow">Branch</span>{branches.filter((branch) => tables.some((table) => table.branchId === branch.id)).map((branch) => <button className={selectedBranchId === branch.id ? "selected" : ""} key={branch.id} type="button" onClick={() => setSelectedBranchId(branch.id)}><strong>{branch.city}</strong><span>{branch.name}</span></button>)}</div><div className="table-selector"><span className="eyebrow">Your table</span>{branchTables.length ? branchTables.map((table) => <button className={selectedTableId === table.id ? "selected" : ""} key={table.id} type="button" onClick={() => setSelectedTableId(table.id)}><strong>{table.number}</strong><span>{table.seats} seats</span></button>) : <div className="modal-line">No tables available for this branch.</div>}</div>{menuGroups.map((group) => <section className="menu-category" key={group.categoryId}><div className="menu-category-title"><span>{group.categoryName}</span><small>{group.items.length} items</small></div>{group.items.map((item) => <article className="menu-row" key={item.id}><div><h3>{item.name}</h3><p>{item.meta}</p></div><strong>{formatCurrency(item.price)}</strong><button type="button" onClick={() => addItem(item)}><Plus size={18} /></button></article>)}</section>)}</div><aside className="order-drawer"><h2>Current Order</h2><div className="receipt-line"><span>Branch</span><strong>{branchName(selectedBranchId, branches)}</strong></div><div className="receipt-line"><span>Table</span><strong>{selectedTable?.number ?? "None"}</strong></div>{cart.length ? cart.map((item, index) => <div className="receipt-line" key={`${item.id}-${index}`}><span>{item.name}</span><strong>{formatCurrency(item.price)}</strong></div>) : <div className="modal-line">No items selected yet.</div>}<div className="receipt-total"><span>Total</span><strong>{formatCurrency(total)}</strong></div><button className="primary-button" type="button" onClick={() => void placeOrder()} disabled={cart.length === 0 || !selectedTable}>Place Order</button></aside></div></section>;
 }
 
 function WaiterView({ tickets, setTickets, setNotice, tables, menuItems }: { tickets: Ticket[]; setTickets: (tickets: Ticket[]) => void; setNotice: (notice: string) => void; tables: DiningTable[]; menuItems: CartItem[] }) {
@@ -828,6 +849,7 @@ function WaiterView({ tickets, setTickets, setNotice, tables, menuItems }: { tic
   const pendingTotal = useMemo(() => pendingGuestTickets.reduce((sum, ticket) => sum + ticket.total, 0), [pendingGuestTickets]);
   const total = localTotal + pendingTotal;
   const hasOrderWork = items.length > 0 || pendingGuestTickets.length > 0;
+  const menuGroups = useMemo(() => groupMenuItems(menuItems), [menuItems]);
   const selectedMenuItem = menuItems.find((item) => item.id === selectedMenuItemId) ?? menuItems[0] ?? null;
 
   useEffect(() => {
@@ -927,7 +949,7 @@ function WaiterView({ tickets, setTickets, setNotice, tables, menuItems }: { tic
     const tableGuestTickets = visibleTickets.filter((ticket) => ticket.branchId === table.branchId && ticket.tableId === table.id && ticket.status === "Confirmed");
     const tableItemCount = tableItems.length + tableGuestTickets.reduce((sum, ticket) => sum + ticket.items.length, 0);
     return <button className={selectedTable.id === table.id ? "table-tile selected" : "table-tile"} key={table.id} type="button" onClick={() => setSelectedTableId(table.id)}><strong>{table.number}</strong><span>{table.seats} seats</span><small>{tableItemCount ? `${tableItemCount} items` : "Empty"}</small><small>{table.zone}</small></button>;
-  })}</div></article><aside className="order-panel"><h2>Table {selectedTable.number}</h2><div className="receipt-line"><span>Zone</span><strong>{selectedTable.zone}</strong></div><div className="receipt-line"><span>Capacity</span><strong>{selectedTable.seats} seats</strong></div><div className="receipt-line"><span>Status</span><strong>{hasOrderWork ? pendingGuestTickets.length ? "Guest order pending" : "Active waiter order" : "Empty"}</strong></div>{pendingGuestTickets.map((ticket) => <div className="modal-line" key={ticket.id}>Guest order #{ticket.id}: {ticket.items.join(", ")}</div>)}{items.length ? items.map((item, index) => <div className="receipt-line" key={`${item.id}-${index}`}><span>{item.name}</span><strong>{formatCurrency(item.price)}</strong></div>) : pendingGuestTickets.length ? null : <div className="modal-line">No items on this table yet.</div>}<div className="menu-picker"><span className="eyebrow">Add item</span>{menuItems.map((item) => <button className={selectedMenuItemId === item.id ? "selected" : ""} key={item.id} type="button" onClick={() => setSelectedMenuItemId(item.id)}><span>{item.name}</span><strong>{formatCurrency(item.price)}</strong></button>)}</div><button className="secondary-button" type="button" onClick={addSelectedItem}><Plus size={18} /> Add Selected Item</button><div className="receipt-total"><span>Total</span><strong>{formatCurrency(total)}</strong></div><button className="primary-button" type="button" onClick={() => void sendToKitchen()} disabled={!hasOrderWork}>Send to Kitchen</button></aside></div></section>;
+  })}</div></article><aside className="order-panel"><h2>Table {selectedTable.number}</h2><div className="receipt-line"><span>Zone</span><strong>{selectedTable.zone}</strong></div><div className="receipt-line"><span>Capacity</span><strong>{selectedTable.seats} seats</strong></div><div className="receipt-line"><span>Status</span><strong>{hasOrderWork ? pendingGuestTickets.length ? "Guest order pending" : "Active waiter order" : "Empty"}</strong></div>{pendingGuestTickets.map((ticket) => <div className="modal-line" key={ticket.id}>Guest order #{ticket.id}: {ticket.items.join(", ")}</div>)}{items.length ? items.map((item, index) => <div className="receipt-line" key={`${item.id}-${index}`}><span>{item.name}</span><strong>{formatCurrency(item.price)}</strong></div>) : pendingGuestTickets.length ? null : <div className="modal-line">No items on this table yet.</div>}<div className="menu-picker"><span className="eyebrow">Add item</span>{menuGroups.map((group) => <div className="menu-picker-category" key={group.categoryId}><div className="menu-category-title"><span>{group.categoryName}</span><small>{group.items.length}</small></div>{group.items.map((item) => <button className={selectedMenuItemId === item.id ? "selected" : ""} key={item.id} type="button" onClick={() => setSelectedMenuItemId(item.id)}><span>{item.name}</span><strong>{formatCurrency(item.price)}</strong></button>)}</div>)}</div><button className="secondary-button" type="button" onClick={addSelectedItem}><Plus size={18} /> Add Selected Item</button><div className="receipt-total"><span>Total</span><strong>{formatCurrency(total)}</strong></div><button className="primary-button" type="button" onClick={() => void sendToKitchen()} disabled={!hasOrderWork}>Send to Kitchen</button></aside></div></section>;
 }
 
 function KitchenView({ tickets, setTickets, setNotice, branches }: { tickets: Ticket[]; setTickets: (tickets: Ticket[]) => void; setNotice: (notice: string) => void; branches: Branch[] }) {
@@ -1036,18 +1058,20 @@ export function App() {
     async function loadRoleData(): Promise<void> {
       try {
         if (activeUser.role === "ADMIN") {
-          const [branchResponse, userResponse, dashboardResponse, tableResponse, orderResponse, menuResponse] = await Promise.all([
+          const [branchResponse, userResponse, dashboardResponse, tableResponse, orderResponse, menuResponse, categoryResponse] = await Promise.all([
             api.get<ApiResponse<BackendBranch[]>>("/admin/branches"),
             api.get<ApiResponse<ApiUser[]>>("/admin/users"),
             api.get<ApiResponse<DashboardReport>>("/headquarters/dashboard"),
             api.get<ApiResponse<BackendTable[]>>("/headquarters/tables"),
             api.get<ApiResponse<BackendOrder[]>>("/headquarters/orders"),
-            api.get<ApiResponse<BackendMenuItem[]>>("/headquarters/menu-items")
+            api.get<ApiResponse<BackendMenuItem[]>>("/headquarters/menu-items"),
+            api.get<ApiResponse<BackendMenuCategory[]>>("/headquarters/menu-categories")
           ]);
           if (cancelled) return;
           const nextBranches = branchResponse.data.success ? branchResponse.data.data.map(mapBranch) : initialBranches;
           const nextTables = tableResponse.data.success ? tableResponse.data.data.map(mapTable) : initialDiningTables;
-          const nextMenuItems = menuResponse.data.success ? menuResponse.data.data.filter((item) => item.isActive).map(mapMenuItem) : fallbackMenuItems;
+          const nextCategories = categoryResponse.data.success ? categoryResponse.data.data : [];
+          const nextMenuItems = menuResponse.data.success ? menuResponse.data.data.filter((item) => item.isActive).map((item) => mapMenuItem(item, nextCategories)) : fallbackMenuItems;
           setBranches(nextBranches);
           setTables(nextTables);
           setMenuItems(nextMenuItems);
@@ -1060,16 +1084,18 @@ export function App() {
         }
 
         if (activeUser.role === "HEADQUARTERS_MANAGER") {
-          const [branchResponse, dashboardResponse, tableResponse, orderResponse, menuResponse] = await Promise.all([
+          const [branchResponse, dashboardResponse, tableResponse, orderResponse, menuResponse, categoryResponse] = await Promise.all([
             api.get<ApiResponse<BackendBranch[]>>("/headquarters/branches"),
             api.get<ApiResponse<DashboardReport>>("/headquarters/dashboard"),
             api.get<ApiResponse<BackendTable[]>>("/headquarters/tables"),
             api.get<ApiResponse<BackendOrder[]>>("/headquarters/orders"),
-            api.get<ApiResponse<BackendMenuItem[]>>("/headquarters/menu-items")
+            api.get<ApiResponse<BackendMenuItem[]>>("/headquarters/menu-items"),
+            api.get<ApiResponse<BackendMenuCategory[]>>("/headquarters/menu-categories")
           ]);
           if (cancelled) return;
           const nextTables = tableResponse.data.success ? tableResponse.data.data.map(mapTable) : initialDiningTables;
-          const nextMenuItems = menuResponse.data.success ? menuResponse.data.data.filter((item) => item.isActive).map(mapMenuItem) : fallbackMenuItems;
+          const nextCategories = categoryResponse.data.success ? categoryResponse.data.data : [];
+          const nextMenuItems = menuResponse.data.success ? menuResponse.data.data.filter((item) => item.isActive).map((item) => mapMenuItem(item, nextCategories)) : fallbackMenuItems;
           if (branchResponse.data.success) setBranches(branchResponse.data.data.map(mapBranch));
           setTables(nextTables);
           setMenuItems(nextMenuItems);
@@ -1093,14 +1119,16 @@ export function App() {
         }
 
         if (activeUser.role === "WAITER") {
-          const [tableResponse, orderResponse, menuResponse] = await Promise.all([
+          const [tableResponse, orderResponse, menuResponse, categoryResponse] = await Promise.all([
             api.get<ApiResponse<BackendTable[]>>("/waiter/tables"),
             api.get<ApiResponse<BackendOrder[]>>("/waiter/orders"),
-            api.get<ApiResponse<BackendMenuItem[]>>("/waiter/menu")
+            api.get<ApiResponse<BackendMenuItem[]>>("/waiter/menu"),
+            api.get<ApiResponse<BackendMenuCategory[]>>("/waiter/menu-categories")
           ]);
           if (cancelled) return;
           const nextTables = tableResponse.data.success ? tableResponse.data.data.map(mapTable) : [];
-          const nextMenuItems = menuResponse.data.success ? menuResponse.data.data.map(mapMenuItem) : fallbackMenuItems;
+          const nextCategories = categoryResponse.data.success ? categoryResponse.data.data : [];
+          const nextMenuItems = menuResponse.data.success ? menuResponse.data.data.map((item) => mapMenuItem(item, nextCategories)) : fallbackMenuItems;
           setTables(nextTables);
           setMenuItems(nextMenuItems);
           if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables, nextMenuItems)).filter((ticket): ticket is Ticket => ticket !== null));
@@ -1134,14 +1162,16 @@ export function App() {
         }
 
         if (activeUser.role === "CUSTOMER") {
-          const [tableResponse, orderResponse, menuResponse] = await Promise.all([
+          const [tableResponse, orderResponse, menuResponse, categoryResponse] = await Promise.all([
             api.get<ApiResponse<BackendTable[]>>("/customer/tables"),
             api.get<ApiResponse<BackendOrder[]>>("/customer/orders"),
-            api.get<ApiResponse<BackendMenuItem[]>>("/customer/menu")
+            api.get<ApiResponse<BackendMenuItem[]>>("/customer/menu"),
+            api.get<ApiResponse<BackendMenuCategory[]>>("/customer/menu-categories")
           ]);
           if (cancelled) return;
           const nextTables = tableResponse.data.success ? tableResponse.data.data.map(mapTable) : [];
-          const nextMenuItems = menuResponse.data.success ? menuResponse.data.data.map(mapMenuItem) : fallbackMenuItems;
+          const nextCategories = categoryResponse.data.success ? categoryResponse.data.data : [];
+          const nextMenuItems = menuResponse.data.success ? menuResponse.data.data.map((item) => mapMenuItem(item, nextCategories)) : fallbackMenuItems;
           setTables(nextTables);
           setMenuItems(nextMenuItems);
           if (orderResponse.data.success) setTickets(orderResponse.data.data.map((order) => mapTicket(order, nextTables, nextMenuItems)).filter((ticket): ticket is Ticket => ticket !== null));
